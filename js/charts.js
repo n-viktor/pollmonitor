@@ -119,7 +119,7 @@ function rajzolTrendPontdiagram(canvasId) {
 
       // Scatter datasets (existing points)
       const scatterDatasets = parties.map(party => ({
-        label: `${party} (Pontok)`, // Módosítottam a labelt
+        label: `${party}`, // Módosítottam a labelt
         type: 'scatter',
         data: pointsPerParty[party],
         showLine: false,
@@ -182,13 +182,21 @@ function rajzolTrendPontdiagram(canvasId) {
               // --- Módosítás vége ---
             },
             tooltip: {
+              // --- Ezt a részt már nem kell módosítani a korábbi verzióhoz képest,
+              //     mert a `tooltip: { enabled: false }` dataset szintű beállítás az elsődleges.
+              //     Hagyjuk meg, ha más típusú chartoknál szükség van rá a komplexebb logikára.
               callbacks: {
                 label: function(context) {
                   let label = context.dataset.label || '';
-                  // Only show detailed info for scatter points, not trend lines
+
+                  // Ha ez egy trendvonal dataset, akkor üres stringet adunk vissza
+                  if (context.dataset.tooltip && context.dataset.tooltip.enabled === false) {
+                    return '';
+                  }
+
                   if (context.dataset.type === 'scatter') {
                       if (label) {
-                        label = label.replace(' (Pontok)', '') + ': '; // Remove "(Pontok)" from label
+                        label = label.replace(' (Pontok)', '') + ': ';
                       }
                       if (context.parsed.y !== null) {
                         label += context.parsed.y + '%';
@@ -200,12 +208,12 @@ function rajzolTrendPontdiagram(canvasId) {
                         const date = new Date(context.raw.x);
                         label += `, ${date.toLocaleDateString('hu-HU')}`;
                       }
-                  } else { // For trend lines, just show party and trend value
+                  } else { // Ez a rész technikailag már nem fut le a `tooltip: { enabled: false }` miatt, de a biztonság kedvéért itt hagyhatjuk.
                       if (label) {
                           label = label.replace(' (Trend)', '') + ' (Trend): ';
                       }
                       if (context.parsed.y !== null) {
-                          label += context.parsed.y.toFixed(1) + '%'; // Round trend value
+                          label += context.parsed.y.toFixed(1) + '%';
                       }
                   }
                   return label;
