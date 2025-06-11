@@ -6,7 +6,8 @@ function randomColor(party) {
     "DK": "#3a67a7",
     "Mi Hazánk": "#708B32",
     "MKKP": "#da0101",
-    "Egyéb": "#979797"
+    "Egyéb párt": "#979797",
+    "Bizonytalan/NT/NV": "#b0b0b0"
   };
   return colors[party] || "#666666";
 }
@@ -88,11 +89,16 @@ function rajzolTrendPontdiagram(canvasId) {
         new Date(p.datum) >= hatHonap
       );
 
-      if(filtered.length === 0) return;
+      if (filtered.length === 0) return;
 
       const parties = Object.keys(filtered[0].eredmenyek);
       const pointsPerParty = {};
-      parties.forEach(p => pointsPerParty[p] = []);
+      const colorMap = {}; // << új objektum a színek tárolására
+
+      parties.forEach(p => {
+        pointsPerParty[p] = [];
+        colorMap[p] = randomColor(p); // << egyszer tároljuk a színt
+      });
 
       filtered.forEach(kutatas => {
         parties.forEach(p => {
@@ -108,7 +114,7 @@ function rajzolTrendPontdiagram(canvasId) {
         data: pointsPerParty[party],
         showLine: false,
         borderColor: 'transparent',
-        backgroundColor: randomColor(party),
+        backgroundColor: colorMap[party], // fix szín innen
         pointRadius: 5,
       }));
 
@@ -116,7 +122,7 @@ function rajzolTrendPontdiagram(canvasId) {
         label: party + " trendvonal",
         data: linearRegression(pointsPerParty[party]),
         fill: false,
-        borderColor: randomColor(party),
+        borderColor: colorMap[party], // ugyanaz a szín
         backgroundColor: 'transparent',
         pointRadius: 0,
         tension: 0,
@@ -164,6 +170,7 @@ function rajzolTrendPontdiagram(canvasId) {
       });
     });
 }
+
 
 window.addEventListener("DOMContentLoaded", () => {
   rajzolLegfrissebbOszlopdiagramok();
