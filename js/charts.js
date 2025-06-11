@@ -12,33 +12,32 @@ function rajzolLegfrissebbOszlopdiagram(containerId) {
         .sort((a, b) => new Date(b.datum) - new Date(a.datum))
         .slice(0, 3);
 
+      if (filtered.length === 0) {
+        console.warn("Nincs adat biztos pártválasztókra.");
+        return;
+      }
+
       const container = document.getElementById(containerId);
-      container.innerHTML = ""; // töröljük, ha volt valami
+      container.innerHTML = ""; // töröljük az előző tartalmat
 
       filtered.forEach((kutatas, index) => {
-        // Cím létrehozása
         const title = document.createElement("h3");
         title.textContent = `${kutatas.intezet} – ${kutatas.datum}`;
         container.appendChild(title);
 
-        // Canvas létrehozása
         const canvas = document.createElement("canvas");
         canvas.id = `legfrissebb-canvas-${index}`;
-        canvas.width = 400; // kisebb méret, hogy sorban férjen el
+        canvas.width = 400;
         canvas.height = 300;
         container.appendChild(canvas);
 
-        // Pártok nevei
         const parties = Object.keys(kutatas.eredmenyek);
-
-        // Diagram adatok
         const dataset = {
           label: `${kutatas.intezet} (${kutatas.datum})`,
           data: parties.map(p => kutatas.eredmenyek[p]),
           backgroundColor: randomColor()
         };
 
-        // Diagram létrehozása
         new Chart(canvas.getContext("2d"), {
           type: "bar",
           data: {
@@ -46,12 +45,9 @@ function rajzolLegfrissebbOszlopdiagram(containerId) {
             datasets: [dataset]
           },
           options: {
-            responsive: false, // fix méret miatt
+            responsive: false,
             plugins: {
-              legend: { display: false },
-              title: {
-                display: false
-              }
+              legend: { display: false }
             },
             scales: {
               y: { beginAtZero: true, max: 100 }
@@ -59,6 +55,9 @@ function rajzolLegfrissebbOszlopdiagram(containerId) {
           }
         });
       });
+    })
+    .catch(err => {
+      console.error("Hiba a JSON betöltésekor:", err);
     });
 }
 
