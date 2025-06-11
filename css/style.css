@@ -132,11 +132,11 @@ footer {
 
   .chart-container {
     max-width: 100%; /* Kisebb képernyőn teljes szélesség */
-    height: 250px;
+    height: 400px;
   }
 
   .chart-container-large {
-    height: 350px; /* Kisebb magasság a nagy diagramnak mobil nézeten */
+    height: 500px; /* Kisebb magasság a nagy diagramnak mobil nézeten */
   }
 }
 
