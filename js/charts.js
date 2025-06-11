@@ -60,52 +60,6 @@ function rajzolLegfrissebbOszlopdiagramok() {
     });
 }
 
-function interpolatePoints(points, startDate, endDate) {
-  points = points
-    .map(p => ({ x: new Date(p.x), y: p.y }))
-    .sort((a, b) => a.x - b.x);
-
-  const result = [];
-  for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-    const currentDate = new Date(d);
-
-    const exact = points.find(p => p.x.getTime() === currentDate.getTime());
-    if (exact) {
-      result.push({ x: new Date(currentDate), y: exact.y });
-      continue;
-    }
-
-    if (currentDate < points[0].x) {
-      result.push({ x: new Date(currentDate), y: points[0].y });
-      continue;
-    }
-
-    if (currentDate > points[points.length - 1].x) {
-      result.push({ x: new Date(currentDate), y: points[points.length - 1].y });
-      continue;
-    }
-
-    let before = null;
-    let after = null;
-    for (let i = 0; i < points.length - 1; i++) {
-      if (points[i].x < currentDate && points[i + 1].x > currentDate) {
-        before = points[i];
-        after = points[i + 1];
-        break;
-      }
-    }
-
-    if (before && after) {
-      const totalTime = after.x - before.x;
-      const elapsed = currentDate - before.x;
-      const ratio = elapsed / totalTime;
-      const interpolatedY = before.y + ratio * (after.y - before.y);
-      result.push({ x: new Date(currentDate), y: interpolatedY });
-    }
-  }
-  return result;
-}
-
 function rajzolTrendPontdiagram(canvasId) {
   fetch("data/adatok.json")
     .then(res => res.json())
@@ -133,14 +87,6 @@ function rajzolTrendPontdiagram(canvasId) {
         });
       });
 
-      const startDate = hatHonap;
-      const endDate = new Date();
-
-      const interpolatedPerParty = {};
-      parties.forEach(p => {
-        interpolatedPerParty[p] = interpolatePoints(pointsPerParty[p], startDate, endDate);
-      });
-
       const scatterDatasets = parties.map(party => ({
         label: party,
         type: 'scatter',
@@ -151,25 +97,9 @@ function rajzolTrendPontdiagram(canvasId) {
         pointRadius: 5,
       }));
 
-      const trendLineDatasets = parties.map(party => ({
-        label: party + " trendvonal",
-        type: 'line',
-        data: interpolatedPerParty[party],
-        fill: false,
-        borderColor: randomColor(party),
-        backgroundColor: 'transparent',
-        pointRadius: 0,
-        tension: 0.3,
-        borderWidth: 3,
-        borderDash: [],
-        datalabels: { display: false }
-      }));
-
-      const datasets = [...scatterDatasets, ...trendLineDatasets];
-
       new Chart(document.getElementById(canvasId), {
         type: 'scatter',
-        data: { datasets },
+        data: { datasets: scatterDatasets },
         options: {
           responsive: true,
           scales: {
@@ -190,10 +120,7 @@ function rajzolTrendPontdiagram(canvasId) {
               text: 'Elmúlt 6 hónap eredményei – biztos pártválasztók'
             },
             legend: {
-              position: 'bottom',
-              labels: {
-                filter: item => !item.text.includes('trendvonal')
-              }
+              position: 'bottom'
             }
           }
         }
