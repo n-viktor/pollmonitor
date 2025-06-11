@@ -14,7 +14,7 @@ function rajzolLegfrissebbOszlopdiagramok() {
 
       filtered.forEach((kutatas, index) => {
         const parties = Object.keys(kutatas.eredmenyek);
-        const dataValues = parties.map(p => kutatas.eredmenyek[p]);
+        const values = parties.map(p => kutatas.eredmenyek[p]);
 
         const canvas = document.getElementById(`legfrissebb-canvas-${index}`);
         if (!canvas) {
@@ -29,7 +29,7 @@ function rajzolLegfrissebbOszlopdiagramok() {
             labels: parties,
             datasets: [{
               label: `${kutatas.intezet} (${kutatas.datum})`,
-              data: dataValues,
+              data: values,
               backgroundColor: randomColor()
             }]
           },
@@ -61,7 +61,6 @@ function rajzolLegfrissebbOszlopdiagramok() {
     .catch(err => console.error("Hiba a JSON betöltésekor:", err));
 }
 
-
 function rajzolTrendPontdiagram(canvasId) {
   fetch("data/adatok.json")
     .then(res => res.json())
@@ -75,7 +74,10 @@ function rajzolTrendPontdiagram(canvasId) {
         new Date(p.datum) >= hatHonap
       );
 
-      if (filtered.length === 0) return;
+      if (filtered.length === 0) {
+        console.warn("Nincs adat az elmúlt 6 hónapra a biztos pártválasztóknál.");
+        return;
+      }
 
       const parties = Object.keys(filtered[0].eredmenyek);
       const pointsPerParty = {};
@@ -100,9 +102,12 @@ function rajzolTrendPontdiagram(canvasId) {
       }));
 
       const ctx = document.getElementById(canvasId).getContext('2d');
+
       new Chart(ctx, {
         type: "scatter",
-        data: { datasets },
+        data: {
+          datasets
+        },
         options: {
           responsive: true,
           scales: {
@@ -131,7 +136,7 @@ function rajzolTrendPontdiagram(canvasId) {
     });
 }
 
-// Automatikus inicializálás
+// Eseménykezelő, hogy csak DOM betöltés után fusson
 window.addEventListener("DOMContentLoaded", () => {
   rajzolLegfrissebbOszlopdiagramok();
   rajzolTrendPontdiagram("trend-canvas");
