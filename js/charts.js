@@ -112,6 +112,33 @@ function rajzolTrendPontdiagram(canvasId) {
         });
       });
 
+      const startDate = hatHonap;
+      const endDate = new Date();
+
+      const interpolatedPerParty = {};
+      parties.forEach(p => {
+        interpolatedPerParty[p] = interpolatePoints(pointsPerParty[p], startDate, endDate);
+      });
+
+      const avgLine = [];
+      const dayCount = Math.floor((endDate - startDate) / (1000*60*60*24));
+      for(let i=0; i <= dayCount; i++) {
+        const date = new Date(startDate);
+        date.setDate(date.getDate() + i);
+
+        let sum = 0, count = 0;
+        parties.forEach(p => {
+          const valObj = interpolatedPerParty[p].find(pt => pt.x.getTime() === date.getTime());
+          if(valObj && valObj.y != null) {
+            sum += valObj.y;
+            count++;
+          }
+        });
+        if(count > 0) {
+          avgLine.push({x: date, y: sum / count});
+        }
+      }
+
       const scatterDatasets = parties.map(party => ({
         label: party,
         type: 'scatter',
@@ -122,23 +149,25 @@ function rajzolTrendPontdiagram(canvasId) {
         pointRadius: 5,
       }));
 
-      const lineDatasets = parties.map(party => ({
-        label: party + " trendvonal",
-        type: 'line', // FONTOS: ez a kulcs, hogy vonalat rajzoljon
-        data: linearRegression(pointsPerParty[party]),
+      // Csak az átlagvonal, nincs pártonkénti trendvonal
+      const lineDatasets = [{
+        label: "Pártok átlaga (6 hónap)",
+        type: 'line',
+        data: avgLine,
         fill: false,
-        borderColor: scatterDatasets.find(d => d.label === party).backgroundColor,
+        borderColor: "#000000",
         backgroundColor: 'transparent',
         pointRadius: 0,
         tension: 0,
-        borderWidth: 2,
+        borderWidth: 3,
+        borderDash: [5,5],
         datalabels: { display: false }
-      }));
+      }];
 
       const datasets = [...scatterDatasets, ...lineDatasets];
 
       new Chart(document.getElementById(canvasId), {
-        type: 'scatter', // scatter típus kell, hogy az x idő legyen
+        type: 'scatter',
         data: { datasets },
         options: {
           responsive: true,
@@ -170,7 +199,6 @@ function rajzolTrendPontdiagram(canvasId) {
       });
     });
 }
-
 
 window.addEventListener("DOMContentLoaded", () => {
   rajzolLegfrissebbOszlopdiagramok();
