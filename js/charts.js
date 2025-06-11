@@ -1,14 +1,18 @@
 function randomColor(party) {
   const colors = {
-    "Tisza": "#038f76",
-    "Fidesz-KDNP": "#fa8d01",
+    "TISZA": "#038f76",
+    "FIDESZ-KDNP": "#fa8d01",
     "DK": "#3a67a7",
-    "Mi Hazánk": "#708B32",
+    "MI HAZÁNK": "#708B32",
     "MKKP": "#da0101",
-    "Egyéb párt": "#979797",
-    "Bizonytalan/NT/NV": "#666666"
+    "EGYÉB PÁRT": "#979797",
+    "BIZONYTALAN/NT/NV": "#666666"
   };
-  return colors[party] || "#666666";
+
+  // Egységesítjük: nagybetű + trim
+  const standardized = party.toUpperCase().trim();
+
+  return colors[standardized] || "#666666";
 }
 
 function linearRegression(data) {
