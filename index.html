@@ -14,8 +14,8 @@
   </header>
 
   <main>
-    <h2>Legfrissebb eredmények (biztos pártválasztók)</h2>
     <section id="legfrissebb">
+      <h2>Legfrissebb eredmények (biztos pártválasztók)</h2>
       <div class="chart-container">
         <canvas id="chart0"></canvas>
       </div>
@@ -34,6 +34,10 @@
         <canvas id="trend-canvas"></canvas>
       </div>
     </section>
+
+    <section>
+      <h2>Cikkek</h2>
+    </section>
   </main>
 
   <footer>
@@ -42,6 +46,9 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@2.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/date-fns@2.30.0/locale/hu/index.js"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <script src="js/charts.js"></script>
 </body>

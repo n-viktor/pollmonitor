@@ -74,11 +74,13 @@ section {
 
 .chart-container {
   flex: 1 1 300px; /* Reszponzív méretezés: flexibilis, alap méret 300px */
-  max-width: 350px; /* Maximális szélesség egy chart konténernek */
-  height: 280px; /* Fix magasság a kisebb chartoknak */
+  /* max-width: 350px; <-- Ezt kivettem, hogy rugalmasabb legyen */
+  min-width: 280px; /* Minimum szélesség, hogy ne legyen túl kicsi */
+  height: 350px; /* <-- Megnöveltem a magasságot 280px-ről 350px-re */
   display: flex; /* Centrálni a canvas-t, ha szükséges */
   align-items: center;
   justify-content: center;
+  position: relative; /* Fontos a canvas méretezéséhez */
 }
 
 .chart-container-large {
@@ -87,11 +89,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-canvas {
-  max-width: 100%; /* A vászon nem lépheti túl a szülője méretét */
-  max-height: 100%; /* A vászon nem lépheti túl a szülője méretét */
+  position: relative; /* Fontos a canvas méretezéséhez */
 }
 
 
@@ -132,11 +130,11 @@ footer {
 
   .chart-container {
     max-width: 100%; /* Kisebb képernyőn teljes szélesség */
-    height: 400px;
+    height: 300px; /* Még nagyobb magasság mobil nézeten */
   }
 
   .chart-container-large {
-    height: 500px; /* Kisebb magasság a nagy diagramnak mobil nézeten */
+    height: 380px; /* Kisebb magasság a nagy diagramnak mobil nézeten */
   }
 }
 
@@ -147,5 +145,9 @@ footer {
 
   h2 {
     font-size: 1.4rem;
+  }
+
+  .chart-container {
+    height: 280px; /* Finomhangolás a legkisebb képernyőkre */
   }
 }
