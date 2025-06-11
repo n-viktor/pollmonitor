@@ -109,6 +109,7 @@ function interpolatePoints(points, startDate, endDate) {
   return result;
 }
 
+
 function rajzolTrendPontdiagram(canvasId) {
   fetch("data/adatok.json")
     .then(res => res.json())
@@ -145,39 +146,49 @@ function rajzolTrendPontdiagram(canvasId) {
         interpolatedPerParty[p] = interpolatePoints(pointsPerParty[p], startDate, endDate);
       });
 
-      // Most készítjük el a dataseteket pártonként:
-      // - Scatter pontok (valós adatok)
-      // - Folytonos vonal (interpolált trendvonal)
+      // Átlagoljuk az interpolált értékeket napi szinten
+      const avgLine = [];
+      for(let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+        const currentDate = new Date(d);
 
-      const datasets = [];
-
-      parties.forEach(party => {
-        // Scatter pont dataset
-        datasets.push({
-          label: party,
-          type: 'scatter',
-          data: pointsPerParty[party],
-          showLine: false,
-          backgroundColor: randomColor(party),
-          borderColor: randomColor(party),
-          pointRadius: 5,
+        let sum = 0, count = 0;
+        parties.forEach(p => {
+          const pt = interpolatedPerParty[p].find(pnt => pnt.x.getTime() === currentDate.getTime());
+          if(pt && pt.y != null) {
+            sum += pt.y;
+            count++;
+          }
         });
+        if(count > 0) {
+          avgLine.push({x: new Date(currentDate), y: sum / count});
+        }
+      }
 
-        // Trendvonal dataset (folytonos vonal)
-        datasets.push({
-          label: party + " trendvonal",
-          type: 'line',
-          data: interpolatedPerParty[party],
-          fill: false,
-          borderColor: randomColor(party),
-          backgroundColor: 'transparent',
-          pointRadius: 0,
-          tension: 0.3,
-          borderWidth: 3,
-          borderDash: [],  // NINCS szaggatás, sima vonal
-          datalabels: { display: false }
-        });
-      });
+      const scatterDatasets = parties.map(party => ({
+        label: party,
+        type: 'scatter',
+        data: pointsPerParty[party],
+        showLine: false,
+        borderColor: 'transparent',
+        backgroundColor: randomColor(party),
+        pointRadius: 5,
+      }));
+
+      const lineDatasets = [{
+        label: "Pártok átlaga (6 hónap)",
+        type: 'line',
+        data: avgLine,
+        fill: false,
+        borderColor: "#000000",
+        backgroundColor: 'transparent',
+        pointRadius: 0,
+        tension: 0.3,
+        borderWidth: 3,
+        borderDash: [5, 5],
+        datalabels: { display: false }
+      }];
+
+      const datasets = [...scatterDatasets, ...lineDatasets];
 
       new Chart(document.getElementById(canvasId), {
         type: 'scatter',
@@ -203,12 +214,17 @@ function rajzolTrendPontdiagram(canvasId) {
             },
             legend: {
               position: 'bottom',
+              labels: {
+                filter: item => !item.text.includes('trendvonal')
+              }
             }
           }
         }
       });
     });
 }
+
+
 
 window.addEventListener("DOMContentLoaded", () => {
   rajzolLegfrissebbOszlopdiagramok();
