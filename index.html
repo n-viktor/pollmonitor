@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PollMonitor - Közvéleménykutatás</title>
 
-  <!-- Chart.js könyvtár CDN-ről -->
+  <!-- Chart.js főkönyvtár CDN-ről -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Date adapter a time skála kezeléséhez -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@2.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -19,13 +21,14 @@
   <main>
     <section id="legfrissebb">
       <h2>Legfrissebb kutatások (biztos pártválasztók)</h2>
-      <div id="legfrissebb-container">
-        <!-- Ide jönnek a 3 külön oszlopdiagram canvasai -->
+      <div style="display:flex; gap: 20px;">
+        <canvas id="legfrissebb-canvas-0" width="250" height="300"></canvas>
+        <canvas id="legfrissebb-canvas-1" width="250" height="300"></canvas>
+        <canvas id="legfrissebb-canvas-2" width="250" height="300"></canvas>
       </div>
     </section>
 
-
-    <section id="pontdiagram">
+    <section id="pontdiagram" style="margin-top: 50px;">
       <h2>Elmúlt 6 hónap trendjei (biztos pártválasztók)</h2>
       <canvas id="trend-canvas" width="800" height="400"></canvas>
     </section>

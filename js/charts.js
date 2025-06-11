@@ -3,20 +3,55 @@ function randomColor() {
   return `rgb(${r()}, ${r()}, ${r()})`;
 }
 
-function rajzolLegfrissebbOszlopdiagram(containerId) {
+function rajzolLegfrissebbOszlopdiagramok() {
   fetch("data/adatok.json")
-  .then(res => res.json())
-  .then(data => {
-    console.log("Adatok betöltve:", data);
+    .then(res => res.json())
+    .then(data => {
+      const filtered = data
+        .filter(p => p.kor === "biztos pártválasztók")
+        .sort((a, b) => new Date(b.datum) - new Date(a.datum))
+        .slice(0, 3);
 
-    const filtered = data
-      .filter(p => p.kor === "biztos pártválasztók")
-      .sort((a, b) => new Date(b.datum) - new Date(a.datum))
-      .slice(0, 3);
+      filtered.forEach((kutatas, index) => {
+        const parties = Object.keys(kutatas.eredmenyek);
+        const dataValues = parties.map(p => kutatas.eredmenyek[p]);
+        const ctx = document.getElementById(`legfrissebb-canvas-${index}`).getContext('2d');
 
-    console.log("Szűrt 3 kutatás:", filtered);
-  })
-  .catch(err => console.error("Hiba a fetch-ben:", err));
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: parties,
+            datasets: [{
+              label: `${kutatas.intezet} (${kutatas.datum})`,
+              data: dataValues,
+              backgroundColor: randomColor()
+            }]
+          },
+          options: {
+            responsive: false,
+            plugins: {
+              title: {
+                display: true,
+                text: `${kutatas.intezet} - ${kutatas.datum}`
+              },
+              legend: {
+                display: false
+              }
+            },
+            scales: {
+              y: {
+                min: 0,
+                max: 100,
+                ticks: {
+                  stepSize: 10,
+                  callback: val => val + '%'
+                }
+              }
+            }
+          }
+        });
+      });
+    });
 }
 
 function rajzolTrendPontdiagram(canvasId) {
@@ -32,7 +67,9 @@ function rajzolTrendPontdiagram(canvasId) {
         new Date(p.datum) >= hatHonap
       );
 
-      const parties = Object.keys(filtered[0]?.eredmenyek || {});
+      if (filtered.length === 0) return;
+
+      const parties = Object.keys(filtered[0].eredmenyek);
       const pointsPerParty = {};
       parties.forEach(p => pointsPerParty[p] = []);
 
@@ -54,11 +91,10 @@ function rajzolTrendPontdiagram(canvasId) {
         tension: 0.3
       }));
 
-      new Chart(document.getElementById(canvasId), {
+      const ctx = document.getElementById(canvasId).getContext('2d');
+      new Chart(ctx, {
         type: "scatter",
-        data: {
-          datasets
-        },
+        data: { datasets },
         options: {
           responsive: true,
           scales: {
@@ -89,6 +125,6 @@ function rajzolTrendPontdiagram(canvasId) {
 
 // Automatikus inicializálás
 window.addEventListener("DOMContentLoaded", () => {
-  rajzolLegfrissebbOszlopdiagram("legfrissebb-container");
+  rajzolLegfrissebbOszlopdiagramok();
   rajzolTrendPontdiagram("trend-canvas");
 });
