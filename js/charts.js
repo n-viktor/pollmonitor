@@ -22,6 +22,10 @@ function rajzolLegfrissebbOszlopdiagramok() {
           return;
         }
         const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          console.error(`Nem lehet 2D kontextust szerezni: legfrissebb-canvas-${index}`);
+          return;
+        }
 
         new Chart(ctx, {
           type: "bar",
@@ -136,7 +140,6 @@ function rajzolTrendPontdiagram(canvasId) {
     });
 }
 
-// Eseménykezelő, hogy csak DOM betöltés után fusson
 window.addEventListener("DOMContentLoaded", () => {
   rajzolLegfrissebbOszlopdiagramok();
   rajzolTrendPontdiagram("trend-canvas");
