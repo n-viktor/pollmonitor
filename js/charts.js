@@ -15,28 +15,6 @@ function randomColor(party) {
   return colors[standardized] || "#666666";
 }
 
-function linearRegression(data) {
-  const xs = data.map(p => new Date(p.x).getTime());
-  const ys = data.map(p => p.y);
-
-  const n = data.length;
-  const sumX = xs.reduce((a,b) => a+b, 0);
-  const sumY = ys.reduce((a,b) => a+b, 0);
-  const sumXY = xs.reduce((acc, val, i) => acc + val*ys[i], 0);
-  const sumXX = xs.reduce((acc, val) => acc + val*val, 0);
-
-  const slope = (n*sumXY - sumX*sumY) / (n*sumXX - sumX*sumX);
-  const intercept = (sumY - slope*sumX) / n;
-
-  const minX = Math.min(...xs);
-  const maxX = Math.max(...xs);
-
-  return [
-    {x: new Date(minX), y: slope*minX + intercept},
-    {x: new Date(maxX), y: slope*maxX + intercept}
-  ];
-}
-
 function rajzolLegfrissebbOszlopdiagramok() {
   fetch('data/adatok.json')
     .then(res => res.json())
@@ -94,12 +72,14 @@ function interpolatePoints(points, startDate, endDate) {
   for(let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
     const currentDate = new Date(d);
 
+    // Pont az adott dátumra
     const exact = points.find(p => p.x.getTime() === currentDate.getTime());
     if(exact) {
       result.push({x: new Date(currentDate), y: exact.y});
       continue;
     }
 
+    // Keresünk két pontot, amely között interpolálunk
     let before = null;
     let after = null;
     for(let i=0; i<points.length-1; i++) {
@@ -117,6 +97,7 @@ function interpolatePoints(points, startDate, endDate) {
       const interpolatedY = before.y + ratio * (after.y - before.y);
       result.push({x: new Date(currentDate), y: interpolatedY});
     } else {
+      // Ha nincs intervallum, akkor null érték (nem jelenik meg a grafikonon)
       result.push({x: new Date(currentDate), y: null});
     }
   }
@@ -195,7 +176,7 @@ function rajzolTrendPontdiagram(canvasId) {
         borderColor: "#000000",
         backgroundColor: 'transparent',
         pointRadius: 0,
-        tension: 0.2,
+        tension: 0.3,
         borderWidth: 3,
         borderDash: [5, 5],
         datalabels: { display: false }
@@ -236,6 +217,7 @@ function rajzolTrendPontdiagram(canvasId) {
       });
     });
 }
+
 
 
 window.addEventListener("DOMContentLoaded", () => {
