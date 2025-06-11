@@ -1,6 +1,3 @@
-// ChartDataLabels plugin hozzáadása
-Chart.register(ChartDataLabels);
-
 function randomColor(party) {
   const colors = {
     "TISZA": "#038f76",
@@ -12,7 +9,9 @@ function randomColor(party) {
     "BIZONYTALAN/NT/NV": "#666666"
   };
 
+  // Egységesítjük: nagybetű + trim
   const standardized = party.toUpperCase().trim();
+
   return colors[standardized] || "#666666";
 }
 
@@ -114,12 +113,60 @@ function rajzolTrendPontdiagram(canvasId) {
         new Date(p.datum) >= hatHonap
       );
 
-      if(filtered.length === 0) return;
+      if (filtered.length === 0) return;
 
       const parties = Object.keys(filtered[0].eredmenyek);
+      const startDate = new Date(hatHonap);
+      const endDate = new Date();
+
+      // Pontok pártonként és intézetenként: { party -> [ { x, y, intezet } ] }
+      const instituteData = {};
+      parties.forEach(p => instituteData[p] = {});
+
+      filtered.forEach(kutatas => {
+        const date = kutatas.datum;
+        const intezet = kutatas.intezet;
+        parties.forEach(party => {
+          if (!instituteData[party][intezet]) {
+            instituteData[party][intezet] = [];
+          }
+          instituteData[party][intezet].push({
+            x: date,
+            y: kutatas.eredmenyek[party]
+          });
+        });
+      });
+
+      // Interpolálás intézetenként
+      const interpolatedPerParty = {};
+      parties.forEach(party => {
+        interpolatedPerParty[party] = [];
+
+        for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+          const currentDate = new Date(d);
+          const interpolatedValues = [];
+
+          for (const intezet in instituteData[party]) {
+            const points = instituteData[party][intezet];
+            const interpolated = interpolatePoints(points, startDate, endDate)
+              .find(p => p.x.toDateString() === currentDate.toDateString());
+            if (interpolated && interpolated.y !== null) {
+              interpolatedValues.push(interpolated.y);
+            }
+          }
+
+          const avg =
+            interpolatedValues.length > 0
+              ? interpolatedValues.reduce((a, b) => a + b, 0) / interpolatedValues.length
+              : null;
+
+          interpolatedPerParty[party].push({ x: new Date(currentDate), y: avg });
+        }
+      });
+
+      // Scatter pontok: eredeti adatok
       const pointsPerParty = {};
       parties.forEach(p => pointsPerParty[p] = []);
-
       filtered.forEach(kutatas => {
         parties.forEach(p => {
           pointsPerParty[p].push({
@@ -129,31 +176,9 @@ function rajzolTrendPontdiagram(canvasId) {
         });
       });
 
-      const startDate = new Date(hatHonap);
-      const endDate = new Date();
-
-      // Interpoláljuk minden párt pontjait napi bontásban
-      const interpolatedPerParty = {};
-      parties.forEach(p => {
-        interpolatedPerParty[p] = interpolatePoints(pointsPerParty[p], startDate, endDate);
-      });
-
-      // Számoljuk ki minden párt átlagát
-      const partyAverages = {};
-      parties.forEach(p => {
-        const validPoints = interpolatedPerParty[p].filter(point => point.y !== null);
-        if(validPoints.length > 0) {
-          partyAverages[p] = validPoints.reduce((sum, point) => sum + point.y, 0) / validPoints.length;
-        } else {
-          partyAverages[p] = 0;
-        }
-      });
-
-      // Most datasetek pártonként: scatter pontok + trendvonal + átlagvonal
+      // Datasetek: scatter + sima átlagvonal
       const datasets = [];
-
       parties.forEach(party => {
-        // Scatter pontok (valós adatok)
         datasets.push({
           label: party,
           type: 'scatter',
@@ -164,9 +189,8 @@ function rajzolTrendPontdiagram(canvasId) {
           pointRadius: 5,
         });
 
-        // Sima trendvonal (interpolált pontok)
         datasets.push({
-          label: party + " trendvonal",
+          label: party + " átlag",
           type: 'line',
           data: interpolatedPerParty[party],
           fill: false,
@@ -174,24 +198,8 @@ function rajzolTrendPontdiagram(canvasId) {
           backgroundColor: 'transparent',
           pointRadius: 0,
           tension: 0.3,
-          borderWidth: 2,
-          datalabels: { display: false }
-        });
-
-        // Átlagvonal
-        datasets.push({
-          label: party + " átlag",
-          type: 'line',
-          data: [
-            {x: startDate, y: partyAverages[party]},
-            {x: endDate, y: partyAverages[party]}
-          ],
-          fill: false,
-          borderColor: randomColor(party),
-          backgroundColor: 'transparent',
-          pointRadius: 0,
           borderWidth: 3,
-          borderDash: [5, 5],
+          borderDash: [], // vagy pl. [5, 5] ha szaggatottat szeretnél
           datalabels: { display: false }
         });
       });
@@ -204,47 +212,29 @@ function rajzolTrendPontdiagram(canvasId) {
           scales: {
             x: {
               type: 'time',
-              time: { 
-                unit: 'month', 
-                tooltipFormat: 'yyyy-MM-dd',
-                displayFormats: {
-                  month: 'MMM yyyy'
-                }
-              },
+              time: { unit: 'month', tooltipFormat: 'yyyy-MM-dd' },
               title: { display: true, text: 'Dátum' }
             },
             y: {
               min: 0,
               max: 100,
-              title: { display: true, text: 'Százalék (%)' }
+              title: { display: true, text: '%' }
             }
           },
           plugins: {
             title: {
               display: true,
-              text: 'Elmúlt 6 hónap eredményei – biztos pártválasztók',
-              font: { size: 16 }
+              text: 'Elmúlt 6 hónap eredményei – biztos pártválasztók (intézeti átlag)'
             },
             legend: {
               position: 'bottom',
               labels: {
-                filter: item => !item.text.includes('trendvonal'),
-                font: { size: 12 }
-              }
-            },
-            tooltip: {
-              callbacks: {
-                label: function(context) {
-                  return `${context.dataset.label}: ${context.parsed.y.toFixed(1)}%`;
-                }
+                filter: item => !item.text.toLowerCase().includes('trendvonal') || true
               }
             }
           }
         }
       });
-    })
-    .catch(error => {
-      console.error('Hiba történt az adatok betöltésekor:', error);
     });
 }
 
