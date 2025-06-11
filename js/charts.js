@@ -79,6 +79,18 @@ function interpolatePoints(points, startDate, endDate) {
       continue;
     }
 
+    // Ha az adott nap kisebb az első pontnál
+    if(currentDate < points[0].x) {
+      result.push({x: new Date(currentDate), y: points[0].y});
+      continue;
+    }
+
+    // Ha az adott nap nagyobb az utolsó pontnál
+    if(currentDate > points[points.length -1].x) {
+      result.push({x: new Date(currentDate), y: points[points.length -1].y});
+      continue;
+    }
+
     // Keresünk két pontot, amely között interpolálunk
     let before = null;
     let after = null;
@@ -96,9 +108,6 @@ function interpolatePoints(points, startDate, endDate) {
       const ratio = elapsed / totalTime;
       const interpolatedY = before.y + ratio * (after.y - before.y);
       result.push({x: new Date(currentDate), y: interpolatedY});
-    } else {
-      // Ha nincs intervallum, akkor null érték (nem jelenik meg a grafikonon)
-      result.push({x: new Date(currentDate), y: null});
     }
   }
   return result;
