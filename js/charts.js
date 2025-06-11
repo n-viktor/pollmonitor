@@ -85,6 +85,44 @@ function rajzolLegfrissebbOszlopdiagramok() {
     });
 }
 
+function interpolatePoints(points, startDate, endDate) {
+  points = points
+    .map(p => ({x: new Date(p.x), y: p.y}))
+    .sort((a,b) => a.x - b.x);
+
+  const result = [];
+  for(let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+    const currentDate = new Date(d);
+
+    const exact = points.find(p => p.x.getTime() === currentDate.getTime());
+    if(exact) {
+      result.push({x: new Date(currentDate), y: exact.y});
+      continue;
+    }
+
+    let before = null;
+    let after = null;
+    for(let i=0; i<points.length-1; i++) {
+      if(points[i].x < currentDate && points[i+1].x > currentDate) {
+        before = points[i];
+        after = points[i+1];
+        break;
+      }
+    }
+
+    if(before && after) {
+      const totalTime = after.x - before.x;
+      const elapsed = currentDate - before.x;
+      const ratio = elapsed / totalTime;
+      const interpolatedY = before.y + ratio * (after.y - before.y);
+      result.push({x: new Date(currentDate), y: interpolatedY});
+    } else {
+      result.push({x: new Date(currentDate), y: null});
+    }
+  }
+  return result;
+}
+
 function rajzolTrendPontdiagram(canvasId) {
   fetch("data/adatok.json")
     .then(res => res.json())
@@ -115,27 +153,27 @@ function rajzolTrendPontdiagram(canvasId) {
       const startDate = hatHonap;
       const endDate = new Date();
 
+      // Interpoláljuk minden párt pontjait napi bontásban
       const interpolatedPerParty = {};
       parties.forEach(p => {
         interpolatedPerParty[p] = interpolatePoints(pointsPerParty[p], startDate, endDate);
       });
 
+      // Átlagoljuk az interpolált értékeket napi szinten
       const avgLine = [];
-      const dayCount = Math.floor((endDate - startDate) / (1000*60*60*24));
-      for(let i=0; i <= dayCount; i++) {
-        const date = new Date(startDate);
-        date.setDate(date.getDate() + i);
+      for(let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+        const currentDate = new Date(d);
 
         let sum = 0, count = 0;
         parties.forEach(p => {
-          const valObj = interpolatedPerParty[p].find(pt => pt.x.getTime() === date.getTime());
-          if(valObj && valObj.y != null) {
-            sum += valObj.y;
+          const pt = interpolatedPerParty[p].find(pnt => pnt.x.getTime() === currentDate.getTime());
+          if(pt && pt.y != null) {
+            sum += pt.y;
             count++;
           }
         });
         if(count > 0) {
-          avgLine.push({x: date, y: sum / count});
+          avgLine.push({x: new Date(currentDate), y: sum / count});
         }
       }
 
@@ -149,7 +187,6 @@ function rajzolTrendPontdiagram(canvasId) {
         pointRadius: 5,
       }));
 
-      // Csak az átlagvonal, nincs pártonkénti trendvonal
       const lineDatasets = [{
         label: "Pártok átlaga (6 hónap)",
         type: 'line',
@@ -158,9 +195,9 @@ function rajzolTrendPontdiagram(canvasId) {
         borderColor: "#000000",
         backgroundColor: 'transparent',
         pointRadius: 0,
-        tension: 0,
+        tension: 0.2,
         borderWidth: 3,
-        borderDash: [5,5],
+        borderDash: [5, 5],
         datalabels: { display: false }
       }];
 
