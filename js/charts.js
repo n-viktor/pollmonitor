@@ -145,33 +145,39 @@ function rajzolTrendPontdiagram(canvasId) {
         interpolatedPerParty[p] = interpolatePoints(pointsPerParty[p], startDate, endDate);
       });
 
-      // Scatter pontok (valós adatok)
-      const scatterDatasets = parties.map(party => ({
-        label: party,
-        type: 'scatter',
-        data: pointsPerParty[party],
-        showLine: false,
-        borderColor: 'transparent',
-        backgroundColor: randomColor(party),
-        pointRadius: 5,
-      }));
+      // Most készítjük el a dataseteket pártonként:
+      // - Scatter pontok (valós adatok)
+      // - Folytonos vonal (interpolált trendvonal)
 
-      // Vonallal összekötött interpolált trendvonalak pártonként
-      const lineDatasets = parties.map(party => ({
-        label: party + " trendvonal",
-        type: 'line',
-        data: interpolatedPerParty[party],
-        fill: false,
-        borderColor: randomColor(party),
-        backgroundColor: 'transparent',
-        pointRadius: 0,
-        tension: 0.3,
-        borderWidth: 3,
-        borderDash: [5, 5],
-        datalabels: { display: false }
-      }));
+      const datasets = [];
 
-      const datasets = [...scatterDatasets, ...lineDatasets];
+      parties.forEach(party => {
+        // Scatter pont dataset
+        datasets.push({
+          label: party,
+          type: 'scatter',
+          data: pointsPerParty[party],
+          showLine: false,
+          backgroundColor: randomColor(party),
+          borderColor: randomColor(party),
+          pointRadius: 5,
+        });
+
+        // Trendvonal dataset (folytonos vonal)
+        datasets.push({
+          label: party + " trendvonal",
+          type: 'line',
+          data: interpolatedPerParty[party],
+          fill: false,
+          borderColor: randomColor(party),
+          backgroundColor: 'transparent',
+          pointRadius: 0,
+          tension: 0.3,
+          borderWidth: 3,
+          borderDash: [],  // NINCS szaggatás, sima vonal
+          datalabels: { display: false }
+        });
+      });
 
       new Chart(document.getElementById(canvasId), {
         type: 'scatter',
