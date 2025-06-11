@@ -44,10 +44,6 @@ function rajzolLegfrissebbOszlopdiagramok() {
 
       filtered.forEach((kutatas, i) => {
         const ctx = document.getElementById(`chart${i}`).getContext('2d');
-        const labels = Object.keys(kutatas.eredmenyek);
-        const values = Object.values(kutatas.eredmenyek);
-        const backgroundColors = labels.map(p => randomColor(p));
-
         new Chart(ctx, {
           type: 'bar',
           data: {
@@ -76,10 +72,7 @@ function rajzolLegfrissebbOszlopdiagramok() {
               }
             },
             scales: {
-              y: {
-                min: 0,
-                max: 100
-              }
+              y: { min: 0, max: 100 }
             }
           },
           plugins: [ChartDataLabels]
@@ -87,6 +80,7 @@ function rajzolLegfrissebbOszlopdiagramok() {
       });
     });
 }
+
 
 function rajzolTrendPontdiagram(canvasId) {
   fetch("data/adatok.json")

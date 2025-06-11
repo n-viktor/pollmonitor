@@ -4,14 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PollMonitor - Közvéleménykutatás</title>
-
-  <!-- Chart.js főkönyvtár CDN-ről -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- Date adapter a time skála kezeléséhez -->
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@2.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
-  <!-- Adatfelirat -->
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
-
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -23,9 +15,9 @@
   <main>
     <h2>Elmúlt 6 hónap trendjei (biztos pártválasztók)</h2>
     <section id="legfrissebb" style="display: flex; gap: 20px;">
-      <canvas id="chart0" width="250" height="250"></canvas>
-      <canvas id="chart1" width="250" height="250"></canvas>
-      <canvas id="chart2" width="250" height="250"></canvas>
+      <canvas id="chart0" width="300" height="250"></canvas>
+      <canvas id="chart1" width="300" height="250"></canvas>
+      <canvas id="chart2" width="300" height="250"></canvas>
     </section>
 
 
@@ -39,6 +31,12 @@
     <p>&copy; 2025 PollMonitor – Minden jog fenntartva.</p>
   </footer>
 
+  <!-- Chart.js főkönyvtár CDN-ről -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Date adapter a time skála kezeléséhez -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@2.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+  <!-- Adatfelirat -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <script src="js/charts.js"></script>
 </body>
 </html>
