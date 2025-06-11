@@ -72,26 +72,22 @@ function interpolatePoints(points, startDate, endDate) {
   for(let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
     const currentDate = new Date(d);
 
-    // Pont az adott dátumra
     const exact = points.find(p => p.x.getTime() === currentDate.getTime());
     if(exact) {
       result.push({x: new Date(currentDate), y: exact.y});
       continue;
     }
 
-    // Ha az adott nap kisebb az első pontnál
     if(currentDate < points[0].x) {
       result.push({x: new Date(currentDate), y: points[0].y});
       continue;
     }
 
-    // Ha az adott nap nagyobb az utolsó pontnál
     if(currentDate > points[points.length -1].x) {
       result.push({x: new Date(currentDate), y: points[points.length -1].y});
       continue;
     }
 
-    // Keresünk két pontot, amely között interpolálunk
     let before = null;
     let after = null;
     for(let i=0; i<points.length-1; i++) {
@@ -149,24 +145,7 @@ function rajzolTrendPontdiagram(canvasId) {
         interpolatedPerParty[p] = interpolatePoints(pointsPerParty[p], startDate, endDate);
       });
 
-      // Átlagoljuk az interpolált értékeket napi szinten
-      const avgLine = [];
-      for(let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-        const currentDate = new Date(d);
-
-        let sum = 0, count = 0;
-        parties.forEach(p => {
-          const pt = interpolatedPerParty[p].find(pnt => pnt.x.getTime() === currentDate.getTime());
-          if(pt && pt.y != null) {
-            sum += pt.y;
-            count++;
-          }
-        });
-        if(count > 0) {
-          avgLine.push({x: new Date(currentDate), y: sum / count});
-        }
-      }
-
+      // Scatter pontok (valós adatok)
       const scatterDatasets = parties.map(party => ({
         label: party,
         type: 'scatter',
@@ -177,19 +156,20 @@ function rajzolTrendPontdiagram(canvasId) {
         pointRadius: 5,
       }));
 
-      const lineDatasets = [{
-        label: "Pártok átlaga (6 hónap)",
+      // Vonallal összekötött interpolált trendvonalak pártonként
+      const lineDatasets = parties.map(party => ({
+        label: party + " trendvonal",
         type: 'line',
-        data: avgLine,
+        data: interpolatedPerParty[party],
         fill: false,
-        borderColor: "#000000",
+        borderColor: randomColor(party),
         backgroundColor: 'transparent',
         pointRadius: 0,
         tension: 0.3,
         borderWidth: 3,
         borderDash: [5, 5],
         datalabels: { display: false }
-      }];
+      }));
 
       const datasets = [...scatterDatasets, ...lineDatasets];
 
@@ -217,17 +197,12 @@ function rajzolTrendPontdiagram(canvasId) {
             },
             legend: {
               position: 'bottom',
-              labels: {
-                filter: item => !item.text.includes('trendvonal')
-              }
             }
           }
         }
       });
     });
 }
-
-
 
 window.addEventListener("DOMContentLoaded", () => {
   rajzolLegfrissebbOszlopdiagramok();
