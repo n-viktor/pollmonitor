@@ -1,13 +1,12 @@
 function randomColor(party) {
   const colors = {
-    "TISZA": "#038f76",
-    "Fidesz": "#fa8d01",
+    "Tisza": "#038f76",
     "Fidesz-KDNP": "#fa8d01",
     "DK": "#3a67a7",
     "Mi Hazánk": "#708B32",
     "MKKP": "#da0101",
     "Egyéb párt": "#979797",
-    "Bizonytalan/NT/NV": "#b0b0b0"
+    "Bizonytalan/NT/NV": "#666666"
   };
   return colors[party] || "#666666";
 }
