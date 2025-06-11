@@ -69,6 +69,26 @@ function rajzolLegfrissebbOszlopdiagramok() {
     });
 }
 
+function calculateMovingAverage(data, windowSize) {
+  if (data.length === 0) return [];
+
+  // Sort data by date (x-axis) to ensure correct moving average calculation
+  const sortedData = [...data].sort((a, b) => new Date(a.x) - new Date(b.x));
+
+  const movingAverages = [];
+  for (let i = 0; i < sortedData.length; i++) {
+    const start = Math.max(0, i - windowSize + 1);
+    const end = i + 1;
+    const window = sortedData.slice(start, end);
+
+    const sum = window.reduce((acc, curr) => acc + curr.y, 0);
+    const average = sum / window.length;
+
+    movingAverages.push({ x: sortedData[i].x, y: average });
+  }
+  return movingAverages;
+}
+
 function rajzolTrendPontdiagram(canvasId) {
   fetch("data/adatok.json")
     .then(res => res.json())
@@ -92,24 +112,45 @@ function rajzolTrendPontdiagram(canvasId) {
           pointsPerParty[p].push({
             x: kutatas.datum,
             y: kutatas.eredmenyek[p],
-            intezet: kutatas.intezet // Itt adtam hozzá az intézet nevét a ponthoz
+            intezet: kutatas.intezet
           });
         });
       });
 
+      // Scatter datasets (existing points)
       const scatterDatasets = parties.map(party => ({
-        label: party,
+        label: `${party} (Pontok)`, // Módosítottam a labelt
         type: 'scatter',
         data: pointsPerParty[party],
         showLine: false,
         borderColor: 'transparent',
         backgroundColor: randomColor(party),
         pointRadius: 5,
+        // Optional: Make scatter points slightly transparent if desired
+        // backgroundColor: p => Chart.helpers.color(randomColor(p.dataset.label.replace(' (Pontok)', ''))).alpha(0.6).rgbString(),
       }));
 
+      // Line datasets (trend lines)
+      const trendLineDatasets = parties.map(party => {
+        const trendData = calculateMovingAverage(pointsPerParty[party], 3); // Adjust window size (e.g., 3, 5, 7) for smoothing
+        return {
+          label: `${party} (Trend)`, // Label for the trend line
+          type: 'line',
+          data: trendData,
+          fill: false,
+          borderColor: randomColor(party), // Same color as scatter points
+          borderWidth: 2,
+          pointRadius: 0, // No points on the trend line
+          tension: 0.3, // Adds a slight curve to the line
+        };
+      });
+
+      // Combine scatter and trend line datasets
+      const allDatasets = [...scatterDatasets, ...trendLineDatasets];
+
       new Chart(document.getElementById(canvasId), {
-        type: 'scatter',
-        data: { datasets: scatterDatasets },
+        type: 'scatter', // Keep base type as scatter for points
+        data: { datasets: allDatasets }, // Use all combined datasets
         options: {
           responsive: true,
           scales: {
@@ -132,24 +173,32 @@ function rajzolTrendPontdiagram(canvasId) {
             legend: {
               position: 'bottom'
             },
-            tooltip: { // Itt módosítottam a tooltip beállításokat
+            tooltip: {
               callbacks: {
                 label: function(context) {
                   let label = context.dataset.label || '';
-                  if (label) {
-                    label += ': ';
-                  }
-                  if (context.parsed.y !== null) {
-                    label += context.parsed.y + '%';
-                  }
-                  // Hozzáadjuk az intézet nevét
-                  if (context.raw.intezet) {
-                    label += ` (${context.raw.intezet})`;
-                  }
-                  // Add the date
-                  if (context.raw.x) {
-                    const date = new Date(context.raw.x);
-                    label += `, ${date.toLocaleDateString('hu-HU')}`; // Format date for Hungarian locale
+                  // Only show detailed info for scatter points, not trend lines
+                  if (context.dataset.type === 'scatter') {
+                      if (label) {
+                        label = label.replace(' (Pontok)', '') + ': '; // Remove "(Pontok)" from label
+                      }
+                      if (context.parsed.y !== null) {
+                        label += context.parsed.y + '%';
+                      }
+                      if (context.raw.intezet) {
+                        label += ` (${context.raw.intezet})`;
+                      }
+                      if (context.raw.x) {
+                        const date = new Date(context.raw.x);
+                        label += `, ${date.toLocaleDateString('hu-HU')}`;
+                      }
+                  } else { // For trend lines, just show party and trend value
+                      if (label) {
+                          label = label.replace(' (Trend)', '') + ' (Trend): ';
+                      }
+                      if (context.parsed.y !== null) {
+                          label += context.parsed.y.toFixed(1) + '%'; // Round trend value
+                      }
                   }
                   return label;
                 }
