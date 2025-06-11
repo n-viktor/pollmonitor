@@ -15,7 +15,13 @@ function rajzolLegfrissebbOszlopdiagramok() {
       filtered.forEach((kutatas, index) => {
         const parties = Object.keys(kutatas.eredmenyek);
         const dataValues = parties.map(p => kutatas.eredmenyek[p]);
-        const ctx = document.getElementById(`legfrissebb-canvas-${index}`).getContext('2d');
+
+        const canvas = document.getElementById(`legfrissebb-canvas-${index}`);
+        if (!canvas) {
+          console.error(`Nem található canvas: legfrissebb-canvas-${index}`);
+          return;
+        }
+        const ctx = canvas.getContext('2d');
 
         new Chart(ctx, {
           type: "bar",
@@ -51,8 +57,10 @@ function rajzolLegfrissebbOszlopdiagramok() {
           }
         });
       });
-    });
+    })
+    .catch(err => console.error("Hiba a JSON betöltésekor:", err));
 }
+
 
 function rajzolTrendPontdiagram(canvasId) {
   fetch("data/adatok.json")
