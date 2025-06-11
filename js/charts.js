@@ -113,60 +113,12 @@ function rajzolTrendPontdiagram(canvasId) {
         new Date(p.datum) >= hatHonap
       );
 
-      if (filtered.length === 0) return;
+      if(filtered.length === 0) return;
 
       const parties = Object.keys(filtered[0].eredmenyek);
-      const startDate = new Date(hatHonap);
-      const endDate = new Date();
-
-      // Pontok pártonként és intézetenként: { party -> [ { x, y, intezet } ] }
-      const instituteData = {};
-      parties.forEach(p => instituteData[p] = {});
-
-      filtered.forEach(kutatas => {
-        const date = kutatas.datum;
-        const intezet = kutatas.intezet;
-        parties.forEach(party => {
-          if (!instituteData[party][intezet]) {
-            instituteData[party][intezet] = [];
-          }
-          instituteData[party][intezet].push({
-            x: date,
-            y: kutatas.eredmenyek[party]
-          });
-        });
-      });
-
-      // Interpolálás intézetenként
-      const interpolatedPerParty = {};
-      parties.forEach(party => {
-        interpolatedPerParty[party] = [];
-
-        for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-          const currentDate = new Date(d);
-          const interpolatedValues = [];
-
-          for (const intezet in instituteData[party]) {
-            const points = instituteData[party][intezet];
-            const interpolated = interpolatePoints(points, startDate, endDate)
-              .find(p => p.x.toDateString() === currentDate.toDateString());
-            if (interpolated && interpolated.y !== null) {
-              interpolatedValues.push(interpolated.y);
-            }
-          }
-
-          const avg =
-            interpolatedValues.length > 0
-              ? interpolatedValues.reduce((a, b) => a + b, 0) / interpolatedValues.length
-              : null;
-
-          interpolatedPerParty[party].push({ x: new Date(currentDate), y: avg });
-        }
-      });
-
-      // Scatter pontok: eredeti adatok
       const pointsPerParty = {};
       parties.forEach(p => pointsPerParty[p] = []);
+
       filtered.forEach(kutatas => {
         parties.forEach(p => {
           pointsPerParty[p].push({
@@ -176,9 +128,20 @@ function rajzolTrendPontdiagram(canvasId) {
         });
       });
 
-      // Datasetek: scatter + sima átlagvonal
+      const startDate = hatHonap;
+      const endDate = new Date();
+
+      // Interpoláljuk minden párt pontjait napi bontásban
+      const interpolatedPerParty = {};
+      parties.forEach(p => {
+        interpolatedPerParty[p] = interpolatePoints(pointsPerParty[p], startDate, endDate);
+      });
+
+      // Most datasetek pártonként: scatter pontok + saját trendvonal
       const datasets = [];
+
       parties.forEach(party => {
+        // Scatter pontok (valós adatok)
         datasets.push({
           label: party,
           type: 'scatter',
@@ -189,8 +152,9 @@ function rajzolTrendPontdiagram(canvasId) {
           pointRadius: 5,
         });
 
+        // Saját sima trendvonal (interpolált pontok)
         datasets.push({
-          label: party + " átlag",
+          label: party + " trendvonal",
           type: 'line',
           data: interpolatedPerParty[party],
           fill: false,
@@ -199,7 +163,7 @@ function rajzolTrendPontdiagram(canvasId) {
           pointRadius: 0,
           tension: 0.3,
           borderWidth: 3,
-          borderDash: [], // vagy pl. [5, 5] ha szaggatottat szeretnél
+          borderDash: [],  // sima vonal, nincs szaggatás
           datalabels: { display: false }
         });
       });
@@ -224,12 +188,13 @@ function rajzolTrendPontdiagram(canvasId) {
           plugins: {
             title: {
               display: true,
-              text: 'Elmúlt 6 hónap eredményei – biztos pártválasztók (intézeti átlag)'
+              text: 'Elmúlt 6 hónap eredményei – biztos pártválasztók'
             },
             legend: {
               position: 'bottom',
               labels: {
                 filter: item => !item.text.toLowerCase().includes('trendvonal') || true
+                // Ezt átírhatod, ha szeretnéd a trendvonalak címkéjét is látni a legendában.
               }
             }
           }
