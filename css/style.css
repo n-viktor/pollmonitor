@@ -1,46 +1,151 @@
-/* style.css – Letisztult stílus */
+/* style.css – Modern, Letisztult Stílus */
+
+/* Google Fonts importálása a CSS-ből, alternatívaként a HTML-beli linkre */
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap'); */
+
+/* Alapbeállítások */
+* {
+  box-sizing: border-box; /* A dobozmodell egységes kezelése */
+}
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
+  font-family: 'Open Sans', sans-serif; /* Modern betűtípus a szöveghez */
+  background-color: #F8F9FA; /* Nagyon világos szürke háttér */
+  color: #343A40; /* Sötét szürke szöveg */
   margin: 0;
   padding: 0;
+  line-height: 1.6; /* Olvasható sorköz */
 }
 
+/* Fejléc */
 header {
-  background-color: #1e88e5;
+  background-color: #3F51B5; /* Mélyebb kék, anyagdizájn színpalettáról */
   color: white;
-  padding: 2rem;
+  padding: 3rem 2rem; /* Nagyobb padding */
   text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Finom árnyék */
 }
 
-main {
-  padding: 2rem;
-  max-width: 960px;
-  margin: auto;
-}
-
-h1, h2 {
+header h1 {
+  font-family: 'Montserrat', sans-serif; /* Modern betűtípus a címekhez */
+  font-weight: 700; /* Vastagabb */
   margin-bottom: 0.5rem;
+  font-size: 2.8rem; /* Nagyobb cím */
 }
 
-#poll-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  margin-top: 1rem;
+header p {
+  font-size: 1.1rem;
+  opacity: 0.9;
 }
 
-.poll-entry {
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
+/* Fő tartalom terület */
+main {
+  padding: 2.5rem 1.5rem; /* Enyhén nagyobb padding */
+  max-width: 1200px; /* Szélesebb fő tartalom terület */
+  margin: 2rem auto; /* Középre igazítás és távolság a fejléc/lábléc között */
 }
 
+h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600; /* Közepesen vastag */
+  color: #3F51B5; /* Ugyanaz a kék szín, mint a fejlécben */
+  margin-top: 2.5rem; /* Távolság a fenti elemtől */
+  margin-bottom: 1.5rem;
+  text-align: center; /* Címek középre igazítva */
+  font-size: 2rem;
+}
+
+/* Diagram szekciók (kártyák) */
+section {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px; /* Lekerekített sarkok */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Enyhe, modern árnyék */
+  margin-bottom: 2.5rem; /* Távolság a szekciók között */
+}
+
+/* Legfrissebb diagramok elrendezése */
+#legfrissebb {
+  display: flex;
+  flex-wrap: wrap; /* Tördelés kisebb képernyőkön */
+  gap: 20px; /* Rések a diagramok között */
+  justify-content: center; /* Középre igazítás */
+}
+
+.chart-container {
+  flex: 1 1 300px; /* Reszponzív méretezés: flexibilis, alap méret 300px */
+  max-width: 350px; /* Maximális szélesség egy chart konténernek */
+  height: 280px; /* Fix magasság a kisebb chartoknak */
+  display: flex; /* Centrálni a canvas-t, ha szükséges */
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-container-large {
+  width: 100%; /* A nagy diagram teljes szélessége */
+  height: 450px; /* Magasság a nagy diagramnak */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+canvas {
+  max-width: 100%; /* A vászon nem lépheti túl a szülője méretét */
+  max-height: 100%; /* A vászon nem lépheti túl a szülője méretét */
+}
+
+
+/* Lábléc */
 footer {
-  background-color: #f1f1f1;
+  background-color: #E9ECEF; /* Világosabb szürke lábléc */
+  color: #6C757D; /* Sötétebb szürke szöveg */
   text-align: center;
-  padding: 1rem;
+  padding: 1.5rem;
   font-size: 0.9rem;
-  margin-top: 2rem;
+  margin-top: 3rem; /* Távolság a fő tartalomtól */
+}
+
+/* Reszponzív design kisebb képernyőkre */
+@media (max-width: 768px) {
+  header {
+    padding: 2rem 1rem;
+  }
+
+  header h1 {
+    font-size: 2.2rem;
+  }
+
+  main {
+    padding: 1.5rem 1rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  #legfrissebb {
+    flex-direction: column; /* Oszlopba rendezés kisebb képernyőkön */
+    align-items: center; /* Középre igazítás */
+  }
+
+  .chart-container {
+    max-width: 100%; /* Kisebb képernyőn teljes szélesség */
+    height: 250px;
+  }
+
+  .chart-container-large {
+    height: 350px; /* Kisebb magasság a nagy diagramnak mobil nézeten */
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
 }
