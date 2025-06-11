@@ -171,7 +171,15 @@ function rajzolTrendPontdiagram(canvasId) {
               text: 'Elmúlt 6 hónap eredményei – biztos pártválasztók'
             },
             legend: {
-              position: 'bottom'
+              position: 'bottom',
+              // --- Módosítás itt ---
+              labels: {
+                filter: function(legendItem, chartData) {
+                  // Csak azokat a elemeket mutasd, amelyek labelje NEM tartalmazza a "(Trend)" stringet
+                  return !legendItem.text.includes('(Trend)');
+                }
+              }
+              // --- Módosítás vége ---
             },
             tooltip: {
               callbacks: {
@@ -209,6 +217,9 @@ function rajzolTrendPontdiagram(canvasId) {
       });
     });
 }
+
+// Ne feledd, hogy a calculateMovingAverage függvényre még mindig szükséged van:
+// function calculateMovingAverage(data, windowSize) { ... }
 
 window.addEventListener("DOMContentLoaded", () => {
   rajzolLegfrissebbOszlopdiagramok();
