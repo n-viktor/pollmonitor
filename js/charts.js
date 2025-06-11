@@ -5,60 +5,18 @@ function randomColor() {
 
 function rajzolLegfrissebbOszlopdiagram(containerId) {
   fetch("data/adatok.json")
-    .then(res => res.json())
-    .then(data => {
-      const filtered = data
-        .filter(p => p.kor === "biztos pártválasztók")
-        .sort((a, b) => new Date(b.datum) - new Date(a.datum))
-        .slice(0, 3);
+  .then(res => res.json())
+  .then(data => {
+    console.log("Adatok betöltve:", data);
 
-      if (filtered.length === 0) {
-        console.warn("Nincs adat biztos pártválasztókra.");
-        return;
-      }
+    const filtered = data
+      .filter(p => p.kor === "biztos pártválasztók")
+      .sort((a, b) => new Date(b.datum) - new Date(a.datum))
+      .slice(0, 3);
 
-      const container = document.getElementById(containerId);
-      container.innerHTML = ""; // töröljük az előző tartalmat
-
-      filtered.forEach((kutatas, index) => {
-        const title = document.createElement("h3");
-        title.textContent = `${kutatas.intezet} – ${kutatas.datum}`;
-        container.appendChild(title);
-
-        const canvas = document.createElement("canvas");
-        canvas.id = `legfrissebb-canvas-${index}`;
-        canvas.width = 400;
-        canvas.height = 300;
-        container.appendChild(canvas);
-
-        const parties = Object.keys(kutatas.eredmenyek);
-        const dataset = {
-          label: `${kutatas.intezet} (${kutatas.datum})`,
-          data: parties.map(p => kutatas.eredmenyek[p]),
-          backgroundColor: randomColor()
-        };
-
-        new Chart(canvas.getContext("2d"), {
-          type: "bar",
-          data: {
-            labels: parties,
-            datasets: [dataset]
-          },
-          options: {
-            responsive: false,
-            plugins: {
-              legend: { display: false }
-            },
-            scales: {
-              y: { beginAtZero: true, max: 100 }
-            }
-          }
-        });
-      });
-    })
-    .catch(err => {
-      console.error("Hiba a JSON betöltésekor:", err);
-    });
+    console.log("Szűrt 3 kutatás:", filtered);
+  })
+  .catch(err => console.error("Hiba a fetch-ben:", err));
 }
 
 function rajzolTrendPontdiagram(canvasId) {
