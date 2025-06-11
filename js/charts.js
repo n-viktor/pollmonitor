@@ -282,7 +282,7 @@ function rajzolTrendPontdiagram(canvasId) {
           data: trendData,
           fill: false,
           borderColor: randomColor(party),
-          borderWidth: 3,
+          borderWidth: 4,
           pointRadius: 0,
           tension: 0.5
         };
@@ -295,6 +295,7 @@ function rajzolTrendPontdiagram(canvasId) {
         data: { datasets: allDatasets },
         options: {
           responsive: true,
+          maintainAspectRatio: false,
           scales: {
             x: {
               type: 'time',

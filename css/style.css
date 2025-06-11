@@ -102,7 +102,6 @@ section {
   position: relative; /* Fontos a canvas méretezéséhez */
 }
 
-
 /* Lábléc */
 footer {
   background-color: #E9ECEF; /* Világosabb szürke lábléc */
@@ -362,6 +361,26 @@ footer {
     margin-top: 2rem; /* Távolság az aktuális cím és a diagram között */
 }
 
+/* ÚJ: Üzenet konténer alapértelmezett elrejtése */
+.rotate-device-message {
+    display: none; /* Alapértelmezetten elrejtve */
+    text-align: center;
+    padding: 20px;
+    background-color: #FFF3CD; /* Halványsárga háttér */
+    color: #856404; /* Sötétsárga szöveg */
+    border: 1px solid #FFECB5;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 400px; /* Ne legyen túl széles */
+}
+
+.rotate-device-message p {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+
 /* Reszponzív design kisebb képernyőkre */
 @media (max-width: 768px) {
   header {
@@ -470,6 +489,41 @@ footer {
     }
 }
 
+@media screen and (max-width: 768px) and (orientation: portrait) {
+    /* Mobil eszközökön, álló (portrait) tájolásban */
+
+    .chart-container-large {
+        display: none; /* A diagram elrejtése */
+    }
+
+    .rotate-device-message {
+        display: block; /* Az üzenet megjelenítése */
+    }
+}
+
+@media screen and (min-width: 769px), screen and (orientation: landscape) {
+    /* Desktopon, vagy mobil eszközökön fekvő (landscape) tájolásban */
+
+    .chart-container-large {
+        display: block; /* A diagram megjelenítése */
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .chart-container-large canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        display: block;
+    }
+
+    .rotate-device-message {
+        display: none; /* Az üzenet elrejtése */
+    }
+}
+
 @media (max-width: 600px) {
     .kutato-leiras, .diagram-kontener {
         padding: 1rem;
@@ -499,10 +553,10 @@ footer {
     height: 280px; /* Finomhangolás a legkisebb képernyőkre */
   }
 
-      .main-nav ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 0; /* Nincs gap mobilnézeten */
+    .main-nav ul {
+      flex-direction: column;
+      align-items: center;
+      gap: 0; /* Nincs gap mobilnézeten */
     }
 
     .main-nav li {
