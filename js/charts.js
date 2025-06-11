@@ -137,7 +137,27 @@ function rajzolTrendPontdiagram(canvasId) {
         interpolatedPerParty[p] = interpolatePoints(pointsPerParty[p], startDate, endDate);
       });
 
-      // Most datasetek pártonként: scatter pontok + saját trendvonal
+      // Számoljuk ki minden párt napi átlagát
+      const dailyAverages = [];
+      const date = new Date(startDate);
+      while (date <= endDate) {
+        const currentDate = new Date(date);
+        const dailyData = { x: new Date(currentDate) };
+        
+        parties.forEach(party => {
+          const partyData = interpolatedPerParty[party].find(d => 
+            d.x.getTime() === currentDate.getTime()
+          );
+          if (partyData) {
+            dailyData[party] = partyData.y;
+          }
+        });
+        
+        dailyAverages.push(dailyData);
+        date.setDate(date.getDate() + 1);
+      }
+
+      // Most datasetek pártonként: scatter pontok + trendvonal + átlagvonal
       const datasets = [];
 
       parties.forEach(party => {
@@ -152,7 +172,7 @@ function rajzolTrendPontdiagram(canvasId) {
           pointRadius: 5,
         });
 
-        // Saját sima trendvonal (interpolált pontok)
+        // Sima trendvonal (interpolált pontok)
         datasets.push({
           label: party + " trendvonal",
           type: 'line',
@@ -162,8 +182,27 @@ function rajzolTrendPontdiagram(canvasId) {
           backgroundColor: 'transparent',
           pointRadius: 0,
           tension: 0.3,
+          borderWidth: 2,
+          datalabels: { display: false }
+        });
+
+        // Átlagvonal
+        const partyAverages = dailyAverages.map(day => ({
+          x: day.x,
+          y: dailyAverages.reduce((sum, d) => sum + (d[party] || 0), 0) / 
+             dailyAverages.filter(d => d[party] !== undefined).length
+        }));
+
+        datasets.push({
+          label: party + " átlag",
+          type: 'line',
+          data: partyAverages,
+          fill: false,
+          borderColor: randomColor(party),
+          backgroundColor: 'transparent',
+          pointRadius: 0,
           borderWidth: 3,
-          borderDash: [],  // sima vonal, nincs szaggatás
+          borderDash: [5, 5],
           datalabels: { display: false }
         });
       });
@@ -194,7 +233,6 @@ function rajzolTrendPontdiagram(canvasId) {
               position: 'bottom',
               labels: {
                 filter: item => !item.text.toLowerCase().includes('trendvonal') || true
-                // Ezt átírhatod, ha szeretnéd a trendvonalak címkéjét is látni a legendában.
               }
             }
           }
