@@ -51,11 +51,11 @@ function rajzolLegfrissebbOszlopdiagramok() {
         new Chart(ctx, {
           type: 'bar',
           data: {
-            labels,
+            labels: Object.keys(kutatas.eredmenyek),
             datasets: [{
               label: `${kutatas.intezet} (${kutatas.datum})`,
-              data: values,
-              backgroundColor: backgroundColors
+              data: Object.values(kutatas.eredmenyek),
+              backgroundColor: Object.keys(kutatas.eredmenyek).map(p => randomColor(p))
             }]
           },
           options: {
@@ -65,12 +65,24 @@ function rajzolLegfrissebbOszlopdiagramok() {
                 display: true,
                 text: `${kutatas.intezet} - ${kutatas.datum}`
               },
-              legend: { display: false }
+              legend: { display: false },
+              datalabels: {
+                anchor: 'end',
+                align: 'end',
+                formatter: value => value + '%',
+                font: {
+                  weight: 'bold'
+                }
+              }
             },
             scales: {
-              y: { min: 0, max: 100 }
+              y: {
+                min: 0,
+                max: 100
+              }
             }
-          }
+          },
+          plugins: [ChartDataLabels]
         });
       });
     });
