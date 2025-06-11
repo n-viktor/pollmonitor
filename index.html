@@ -2,11 +2,13 @@
 <html lang="hu">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PollMonitor</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PollMonitor - Közvéleménykutatás</title>
+
+  <!-- Chart.js könyvtár CDN-ről -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script defer src="js/charts.js"></script>
+
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <header>
@@ -21,7 +23,7 @@
     </section>
 
     <section id="pontdiagram">
-      <h2>Elmúlt 6 hónap trendjei</h2>
+      <h2>Elmúlt 6 hónap trendjei (biztos pártválasztók)</h2>
       <canvas id="trend-canvas" width="800" height="400"></canvas>
     </section>
   </main>
@@ -29,5 +31,12 @@
   <footer>
     <p>&copy; 2025 PollMonitor – Minden jog fenntartva.</p>
   </footer>
+
+  <script src="js/charts.js"></script>
+  <script>
+    // Diagramok betöltése és kirajzolása
+    rajzolLegfrissebbOszlopdiagram("legfrissebb-canvas");
+    rajzolTrendPontdiagram("trend-canvas");
+  </script>
 </body>
 </html>
