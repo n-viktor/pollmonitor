@@ -78,16 +78,6 @@ function interpolatePoints(points, startDate, endDate) {
       continue;
     }
 
-    if(currentDate < points[0].x) {
-      result.push({x: new Date(currentDate), y: points[0].y});
-      continue;
-    }
-
-    if(currentDate > points[points.length -1].x) {
-      result.push({x: new Date(currentDate), y: points[points.length -1].y});
-      continue;
-    }
-
     let before = null;
     let after = null;
     for(let i=0; i<points.length-1; i++) {
@@ -104,6 +94,8 @@ function interpolatePoints(points, startDate, endDate) {
       const ratio = elapsed / totalTime;
       const interpolatedY = before.y + ratio * (after.y - before.y);
       result.push({x: new Date(currentDate), y: interpolatedY});
+    } else {
+      result.push({x: new Date(currentDate), y: null});
     }
   }
   return result;
@@ -145,14 +137,11 @@ function rajzolTrendPontdiagram(canvasId) {
         interpolatedPerParty[p] = interpolatePoints(pointsPerParty[p], startDate, endDate);
       });
 
-      // Most készítjük el a dataseteket pártonként:
-      // - Scatter pontok (valós adatok)
-      // - Folytonos vonal (interpolált trendvonal)
-
+      // Most datasetek pártonként: scatter pontok + saját trendvonal
       const datasets = [];
 
       parties.forEach(party => {
-        // Scatter pont dataset
+        // Scatter pontok (valós adatok)
         datasets.push({
           label: party,
           type: 'scatter',
@@ -163,7 +152,7 @@ function rajzolTrendPontdiagram(canvasId) {
           pointRadius: 5,
         });
 
-        // Trendvonal dataset (folytonos vonal)
+        // Saját sima trendvonal (interpolált pontok)
         datasets.push({
           label: party + " trendvonal",
           type: 'line',
@@ -174,7 +163,7 @@ function rajzolTrendPontdiagram(canvasId) {
           pointRadius: 0,
           tension: 0.3,
           borderWidth: 3,
-          borderDash: [],  // NINCS szaggatás, sima vonal
+          borderDash: [],  // sima vonal, nincs szaggatás
           datalabels: { display: false }
         });
       });
@@ -203,6 +192,10 @@ function rajzolTrendPontdiagram(canvasId) {
             },
             legend: {
               position: 'bottom',
+              labels: {
+                filter: item => !item.text.toLowerCase().includes('trendvonal') || true
+                // Ezt átírhatod, ha szeretnéd a trendvonalak címkéjét is látni a legendában.
+              }
             }
           }
         }
