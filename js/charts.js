@@ -146,6 +146,11 @@ function rajzolTrendPontdiagram(canvasId) {
                   if (context.raw.intezet) {
                     label += ` (${context.raw.intezet})`;
                   }
+                  // Add the date
+                  if (context.raw.x) {
+                    const date = new Date(context.raw.x);
+                    label += `, ${date.toLocaleDateString('hu-HU')}`; // Format date for Hungarian locale
+                  }
                   return label;
                 }
               }
