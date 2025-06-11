@@ -71,6 +71,21 @@ function rajzolLegfrissebbOszlopdiagramok() {
                   weight: 'bold',
                   size: 12 // <-- Adatfeliratok betűméretének csökkentése
                 }
+              },
+              tooltip: { // <-- EZ AZ ÚJ RÉSZ
+                enabled: true, // Biztosítsuk, hogy a tooltip engedélyezve van
+                callbacks: {
+                  title: function(tooltipItems) {
+                      // A tooltipItems tömbben van az összes adatpont, ami az egér alatt van.
+                      // Bar chart esetén általában csak egy van.
+                      return tooltipItems[0].label; // A párt neve (label)
+                  },
+                  label: function(tooltipItem) {
+                      // tooltipItem.parsed.y az adatpont értéke (százalék)
+                      // kutatas.datum a kutatás dátuma
+                      return `${tooltipItem.parsed.y}%, ${kutatas.datum}`;
+                  }
+                }
               }
             },
             scales: {

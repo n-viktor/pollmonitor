@@ -65,6 +65,29 @@
       </div>
     </section>
 
+    <section class="countdown-section">
+    <h2>VÁLASZTÁS 2026</h2>
+    <div id="countdown-timer" class="countdown-timer">
+        <div class="countdown-item">
+            <span id="days">00</span>
+            <span class="label">nap</span>
+        </div>
+        <div class="countdown-item">
+            <span id="hours">00</span>
+            <span class="label">óra</span>
+        </div>
+        <div class="countdown-item">
+            <span id="minutes">00</span>
+            <span class="label">perc</span>
+        </div>
+        <div class="countdown-item">
+            <span id="seconds">00</span>
+            <span class="label">másodperc</span>
+        </div>
+    </div>
+    <p id="countdown-message" class="countdown-message"></p>
+</section>
+
     <section>
       <h2>Cikkek</h2>
       <a href="/cikkek.html#cikk-0611-1"><h3>Republikon: A Tisza vezet a biztos pártválasztók és a teljes népesség körében</h3></a>
@@ -83,6 +106,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <script src="js/charts.js"></script>
+  <script src="countdown.js"></script>
   <script>
   // Feltételezve, hogy a rajzolTrendPontdiagram függvény elérhető és képes szűrni kor szerint.
 

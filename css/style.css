@@ -380,6 +380,202 @@ footer {
     font-weight: 600;
 }
 
+/* Visszaszámlálás szekció */
+.countdown-section {
+    background-image: linear-gradient(to bottom right, red, white, green);
+    padding: 0.5rem;
+    border-radius: 10px;
+    text-align: center;
+    margin: 2.5rem auto;
+}
+
+.countdown-section h2 {
+    color: var(--text-heading); /* A cím színe */
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem; /* Elemek közötti távolság */
+    margin-bottom: 2rem;
+    flex-wrap: wrap; /* Törje a sorokat kisebb képernyőn */
+}
+
+.countdown-item {
+    background-color: var(--color-button-bg); /* Háttérszín a számoknak */
+    color: var(--text-primary); /* Számok színe */
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    min-width: 120px; /* Minimális szélesség, hogy ne legyen túl kicsi */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto Mono', monospace; /* Monospace font a számokhoz */
+    box-shadow: 0 2px 8px var(--color-shadow-light);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.countdown-item span:first-child { /* Maga a szám */
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    color: var(--color-nav-active); /* A számok kiemelt színe */
+}
+
+.countdown-item .label { /* Az egység neve (nap, óra, stb.) */
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--text-secondary); /* A feliratok színe */
+}
+
+.countdown-message {
+    font-size: 1.2rem;
+    color: var(--text-heading);
+    font-weight: 600;
+}
+
+.countdown-item span:first-child {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    color: var(--color-nav-active); /* A számok kiemelt színe */
+
+    /* ÚJ: Átmenetek az animációhoz */
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out; /* Rövid, gyors animáció */
+}
+
+/* ÚJ: Ez az osztály felel az animáció indításáért */
+.countdown-item span:first-child.animate-in {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.countdown-item span:first-child.animate-out {
+    transform: scale(0.8); /* Kicsit összemegy */
+    opacity: 0; /* Elhalványul */
+}
+
+/* Felugró visszaszámláló konténer */
+.floating-countdown-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-image: linear-gradient(to bottom right, red, white, green); /* Háttérszín */
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 0rem;
+    box-shadow: 0 8px 25px var(--color-shadow-heavy);
+    width: 320px; /* Fix szélesség */
+    max-width: 90vw; /* Mobilra optimalizálás */
+    z-index: 1000; /* Legyen felül */
+    display: none; /* Alapértelmezetten rejtett */
+
+    /* Animációhoz */
+    opacity: 0;
+    transform: translateY(50px); /* Kezdetben lejjebb, a "felugráshoz" */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.floating-countdown-container.show {
+    opacity: 1;
+    transform: translateY(0); /* Felugrik az eredeti helyére */
+    display: block; /* Láthatóvá teszi */
+}
+
+/* Bezáró gomb */
+.close-countdown-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    line-height: 1;
+    padding: 5px;
+    transition: color 0.2s ease;
+}
+
+.close-countdown-btn:hover {
+    color: var(--text-primary);
+}
+
+/* Cím a felugróban */
+.floating-countdown-title {
+    color: var(--text-heading);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+/* A lebegő visszaszámláló egységei */
+.floating-countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem; /* Kisebb távolság a kisebb méret miatt */
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.floating-countdown-timer .countdown-item {
+    background-color: #ffffff; /* A számok háttérszíne a felugróban */
+    color: var(--text-primary);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    min-width: 30px; /* Kisebb min-width */
+    font-family: 'Roboto Mono', monospace;
+    box-shadow: 0 1px 4px var(--color-shadow-light);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.floating-countdown-timer .countdown-item span:first-child {
+    font-size: 1.3rem; /* Kisebb számok */
+    font-weight: 700;
+    color: var(--color-nav-active);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+
+    /* Animációhoz a lebegőben is */
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+}
+
+.floating-countdown-timer .countdown-item .label {
+    font-size: 0.7rem; /* Kisebb feliratok */
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.floating-countdown-container .countdown-message {
+    font-size: 1dvb;
+    color: var(--text-heading);
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Animáció osztályok a lebegőhöz is */
+.floating-countdown-timer .countdown-item span:first-child.animate-in {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.floating-countdown-timer .countdown-item span:first-child.animate-out {
+    transform: scale(0.8);
+    opacity: 0;
+}
 
 /* Reszponzív design kisebb képernyőkre */
 @media (max-width: 768px) {
@@ -538,6 +734,23 @@ footer {
     .diagram-canvas-kontener {
         height: 350px; /* Kisebb magasság mobilnézeten */
     }
+
+    .countdown-section h2 {
+        font-size: 1.8rem;
+    }
+    .countdown-timer {
+        gap: 1rem;
+    }
+    .countdown-item {
+        min-width: 90px;
+        padding: 0.8rem 1rem;
+    }
+    .countdown-item span:first-child {
+        font-size: 2.5rem;
+    }
+    .countdown-item .label {
+        font-size: 0.8rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -553,69 +766,85 @@ footer {
     height: 280px; /* Finomhangolás a legkisebb képernyőkre */
   }
 
-    .main-nav ul {
-      flex-direction: column;
-      align-items: center;
-      gap: 0; /* Nincs gap mobilnézeten */
-    }
+  .main-nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 0; /* Nincs gap mobilnézeten */
+  }
 
-    .main-nav li {
-        width: 100%; /* Minden fő menüpont teljes szélességben */
-        text-align: center;
-    }
+  .main-nav li {
+      width: 100%; /* Minden fő menüpont teljes szélességben */
+      text-align: center;
+  }
 
-    .main-nav li a {
-        padding: 0.8rem 1rem;
-        font-size: 1rem;
-        display: block;
-        border-radius: 0; /* Mobilnézeten nincs kerekítés a fő nav linkeken */
-    }
-    .main-nav li:first-child a {
-        border-top-left-radius: 8px; /* Top lekerekítés a fő nav első elemének */
-        border-top-right-radius: 8px;
-    }
+  .main-nav li a {
+      padding: 0.8rem 1rem;
+      font-size: 1rem;
+      display: block;
+      border-radius: 0; /* Mobilnézeten nincs kerekítés a fő nav linkeken */
+  }
+  .main-nav li:first-child a {
+      border-top-left-radius: 8px; /* Top lekerekítés a fő nav első elemének */
+      border-top-right-radius: 8px;
+  }
 
-    /* Almenü mobilnézeten (kattintásra jelenik meg) */
-    .submenu {
-        position: static; /* Statikus pozíció a normál áramlásban */
-        width: 100%;
-        background-color: #5C6BC0; /* Enyhén világosabb kék az almenünek mobilnézeten */
-        box-shadow: none;
-        border-radius: 0; /* Nincs lekerekítés mobil almenüben */
-        margin-top: 0; /* Nincs távolság */
-        display: none; /* JS-el kell megjeleníteni */
-        border-top: 1px solid rgba(255, 255, 255, 0.2); /* Kis elválasztó fent */
-    }
+  /* Almenü mobilnézeten (kattintásra jelenik meg) */
+  .submenu {
+      position: static; /* Statikus pozíció a normál áramlásban */
+      width: 100%;
+      background-color: #5C6BC0; /* Enyhén világosabb kék az almenünek mobilnézeten */
+      box-shadow: none;
+      border-radius: 0; /* Nincs lekerekítés mobil almenüben */
+      margin-top: 0; /* Nincs távolság */
+      display: none; /* JS-el kell megjeleníteni */
+      border-top: 1px solid rgba(255, 255, 255, 0.2); /* Kis elválasztó fent */
+  }
 
-    .submenu li a {
-        padding: 0.6rem 1rem;
-        font-size: 0.9rem;
-        background-color: transparent !important; /* Felülírja az aktív színt mobil almenüben */
-        color: white;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .submenu li:last-child a {
-      border-bottom: none;
-    }
+  .submenu li a {
+      padding: 0.6rem 1rem;
+      font-size: 0.9rem;
+      background-color: transparent !important; /* Felülírja az aktív színt mobil almenüben */
+      color: white;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .submenu li:last-child a {
+    border-bottom: none;
+  }
 
-    .submenu li a.active-submenu-item {
-        background-color: #7986CB !important; /* Más árnyalat az aktív almenü elemnek mobilnézeten */
-    }
+  .submenu li a.active-submenu-item {
+      background-color: #7986CB !important; /* Más árnyalat az aktív almenü elemnek mobilnézeten */
+  }
 
-    /* Kattintásra megjelenő/eltűnő almenü (JS-hez) */
-    .has-submenu.active-mobile-submenu > .submenu {
-        display: flex;
-    }
-    /* Aktív szülő menüpont mobilnézeten, ha az almenü nyitva van */
-    .has-submenu.active-mobile-submenu > a {
-        background-color: #3F51B5; /* Maradjon aktív színű, amikor nyitva van */
-        color: white;
-        border-bottom-left-radius: 0; /* Ne kerekedjen alul */
-        border-bottom-right-radius: 0;
-    }
-    /* Ha az utolsó eleme a navi menünek, és nyitva van, annak is legyen lekerekítés felül */
-    .main-nav li.has-submenu.active-mobile-submenu:last-child {
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-    }
+  /* Kattintásra megjelenő/eltűnő almenü (JS-hez) */
+  .has-submenu.active-mobile-submenu > .submenu {
+      display: flex;
+  }
+  /* Aktív szülő menüpont mobilnézeten, ha az almenü nyitva van */
+  .has-submenu.active-mobile-submenu > a {
+      background-color: #3F51B5; /* Maradjon aktív színű, amikor nyitva van */
+      color: white;
+      border-bottom-left-radius: 0; /* Ne kerekedjen alul */
+      border-bottom-right-radius: 0;
+  }
+  /* Ha az utolsó eleme a navi menünek, és nyitva van, annak is legyen lekerekítés felül */
+  .main-nav li.has-submenu.active-mobile-submenu:last-child {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+  }
+
+  .floating-countdown-container {
+      right: 10px;
+      bottom: 10px;
+      width: calc(100% - 20px); /* Teljes szélesség, kis margóval */
+      padding: 1rem;
+  }
+  .floating-countdown-title {
+      font-size: 1.5rem;
+  }
+  .floating-countdown-timer .countdown-item span:first-child {
+      font-size: 1.5rem;
+  }
+  .floating-countdown-timer .countdown-item .label {
+      font-size: 0.6rem;
+  }
 }
