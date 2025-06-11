@@ -42,99 +42,98 @@ function rajzolLegfrissebbOszlopdiagramok() {
     });
   }
 
-  function rajzolTrendPontdiagram(canvasId) {
-    function rajzolTrendPontdiagram(canvasId) {
-    fetch("data/adatok.json")
-      .then(res => res.json())
-      .then(data => {
-        const most = new Date();
-        const hatHonap = new Date();
-        hatHonap.setMonth(hatHonap.getMonth() - 6);
+function rajzolTrendPontdiagram(canvasId) {
+  fetch("data/adatok.json")
+    .then(res => res.json())
+    .then(data => {
+      const most = new Date();
+      const hatHonap = new Date();
+      hatHonap.setMonth(hatHonap.getMonth() - 6);
 
-        const filtered = data.filter(p =>
-          p.kor === "biztos pártválasztók" &&
-          new Date(p.datum) >= hatHonap
-        );
+      const filtered = data.filter(p =>
+        p.kor === "biztos pártválasztók" &&
+        new Date(p.datum) >= hatHonap
+      );
 
-        if(filtered.length === 0) return;
+      if(filtered.length === 0) return;
 
-        const parties = Object.keys(filtered[0].eredmenyek);
-        const pointsPerParty = {};
-        parties.forEach(p => pointsPerParty[p] = []);
+      const parties = Object.keys(filtered[0].eredmenyek);
+      const pointsPerParty = {};
+      parties.forEach(p => pointsPerParty[p] = []);
 
-        filtered.forEach(kutatas => {
-          parties.forEach(p => {
-            pointsPerParty[p].push({
-              x: kutatas.datum,
-              y: kutatas.eredmenyek[p]
-            });
+      filtered.forEach(kutatas => {
+        parties.forEach(p => {
+          pointsPerParty[p].push({
+            x: kutatas.datum,
+            y: kutatas.eredmenyek[p]
           });
         });
+      });
 
-        // Dataset pontokhoz (scatter, csak pontok)
-        const scatterDatasets = parties.map(party => ({
-          label: party,
-          data: pointsPerParty[party],
-          showLine: false, // ne kötődjön össze
-          borderColor: 'transparent',
-          backgroundColor: randomColor(),
-          pointRadius: 5,
-        }));
+      // Dataset pontokhoz (scatter, csak pontok)
+      const scatterDatasets = parties.map(party => ({
+        label: party,
+        data: pointsPerParty[party],
+        showLine: false, // ne kötődjön össze
+        borderColor: 'transparent',
+        backgroundColor: randomColor(),
+        pointRadius: 5,
+      }));
 
-        // Dataset trendvonalhoz (line, két pont a regresszióból)
-        const lineDatasets = parties.map(party => ({
-          label: party + " trendvonal",
-          data: linearRegression(pointsPerParty[party]),
-          fill: false,
-          borderColor: scatterDatasets.find(d => d.label === party).backgroundColor,
-          backgroundColor: 'transparent',
-          pointRadius: 0,
-          tension: 0, // egyenes vonal
-          borderWidth: 2,
-          datalabels: { display: false }
-        }));
+      // Dataset trendvonalhoz (line, két pont a regresszióból)
+      const lineDatasets = parties.map(party => ({
+        label: party + " trendvonal",
+        data: linearRegression(pointsPerParty[party]),
+        fill: false,
+        borderColor: scatterDatasets.find(d => d.label === party).backgroundColor,
+        backgroundColor: 'transparent',
+        pointRadius: 0,
+        tension: 0, // egyenes vonal
+        borderWidth: 2,
+        datalabels: { display: false }
+      }));
 
-        const datasets = [...scatterDatasets, ...lineDatasets];
+      const datasets = [...scatterDatasets, ...lineDatasets];
 
-        new Chart(document.getElementById(canvasId), {
-          type: "scatter",
-          data: {
-            datasets
-          },
-          options: {
-            responsive: true,
-            scales: {
-              x: {
-                type: "time",
-                time: {
-                  unit: "month",
-                  tooltipFormat: "yyyy-MM-dd"
-                },
-                title: { display: true, text: "Dátum" }
+      new Chart(document.getElementById(canvasId), {
+        type: "scatter",
+        data: {
+          datasets
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: {
+              type: "time",
+              time: {
+                unit: "month",
+                tooltipFormat: "yyyy-MM-dd"
               },
-              y: {
-                min: 0,
-                max: 100,
-                title: { display: true, text: "%" }
-              }
+              title: { display: true, text: "Dátum" }
             },
-            plugins: {
-              title: {
-                display: true,
-                text: "Elmúlt 6 hónap eredményei – biztos pártválasztók"
-              },
-              legend: {
-                position: "bottom",
-                labels: {
-                  filter: (item) => !item.text.includes("trendvonal") // trendvonalakat ne listázza a legenda
-                }
+            y: {
+              min: 0,
+              max: 100,
+              title: { display: true, text: "%" }
+            }
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: "Elmúlt 6 hónap eredményei – biztos pártválasztók"
+            },
+            legend: {
+              position: "bottom",
+              labels: {
+                filter: (item) => !item.text.includes("trendvonal") // trendvonalakat ne listázza a legenda
               }
             }
           }
-        });
+        }
       });
-  }
+    });
 }
+
 
 window.addEventListener("DOMContentLoaded", () => {
   rajzolLegfrissebbOszlopdiagramok();
