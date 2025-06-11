@@ -8,10 +8,33 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <header>
-    <h1>PollMonitor</h1>
-    <p>A legfrissebb közvélemény-kutatási adatok egy helyen</p>
+  <header id="main-header">
+    <a href="/index.html" class="logo-link">
+      <img src="/img/pollmonitor_logo-mottoval.png" alt="PollMonitor Logo" class="header-logo">
+    </a>
   </header>
+
+  <nav class="main-nav">
+  <ul>
+    <li><a href="/index.html" id="nav-home">Főoldal</a></li>
+    <li><a href="/cikkek.html" id="nav-cikkek">Cikkek</a></li> <li class="has-submenu">
+      <a href="#" id="nav-kutatok">Kutatóintézetek</a>
+      <ul class="submenu">
+        <li><a href="/kutatok/21kutato.html" id="nav-21kutato">21 Kutatóközpont</a></li>
+        <li><a href="/kutatok/idea.html" id="nav-idea">IDEA Intézet</a></li>
+        <li><a href="/kutatok/iranytu.html" id="nav-iranytu">Iránytű Intézet</a></li>
+        <li><a href="/kutatok/mtarskut.html" id="nav-mtarskut">Magyar Társadalomkutató</a></li>
+        <li><a href="/kutatok/median.html" id="nav-median">Medián</a></li>
+        <li><a href="/kutatok/nezopont.html" id="nav-nezopont">Nézőpont Intézet</a></li>
+        <li><a href="/kutatok/publicus.html" id="nav-publicus">Publicus Intézet</a></li>
+        <li><a href="/kutatok/republikon.html" id="nav-republikon">Republikon Intézet</a></li>
+        <li><a href="/kutatok/realpr93.html" id="nav-realpr93">REAL-PR 93. Közvéleménykutató</a></li>
+        <li><a href="/kutatok/szazadveg.html" id="nav-szazadveg">Századvég</a></li>
+        <li><a href="/kutatok/zavecz.html" id="nav-zavecz">Závecz Research</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
 
   <main>
     <section id="legfrissebb">
@@ -51,5 +74,81 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <script src="js/charts.js"></script>
+  <script>
+  // Feltételezve, hogy a rajzolTrendPontdiagram függvény elérhető és képes szűrni kor szerint.
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // ... (Navigáció aktív állapotának kezelése rész változatlan) ...
+
+    // --- ÚJ KÓD A DIAGRAM KOR VÁLTÁSÁHOZ ---
+
+    // Azon kutatóintézet neve, amelynek az oldalán vagyunk
+    const currentIntezet = 'Medián'; // Ezt a sort ne felejtsd el módosítani minden aloldalon!
+
+    const diagramCim = document.getElementById('diagram-cim');
+    const btnBiztosValasztok = document.getElementById('btn-biztos-valasztok');
+    const btnTeljesNepesseg = document.getElementById('btn-teljes-nepesseg');
+    // IDE JÖHETNEK A KORTARTOMÁNY GOMBOK, PL.:
+    // const btnFiatalok = document.getElementById('btn-fiatalok');
+    // const btnIdosok = document.getElementById('btn-idosok');
+
+    const chartCanvasId = 'kutato-trend-canvas'; // A canvas ID-je
+
+    // KEZDETI KORTARTOMÁNY, PONTOSAN ANNAK NEVE, AMIT AZ adatok.json-ban HASZNÁLSZ
+    let currentKor = 'Biztos pártválasztók'; // Példa: ha a "Biztos pártválasztók" egy "kor" kategória
+
+    // Funkció a diagram frissítésére
+    function frissitDiagramot(kor) { // 'kategoria' helyett 'kor'
+      diagramCim.textContent = `Legfrissebb eredmények (${kor})`;
+      // Feltételezzük, hogy a rajzolTrendPontdiagram függvény képes kor szerint szűrni
+      rajzolTrendPontdiagram(chartCanvasId, currentIntezet, kor); // 'kategoria' helyett 'kor'
+    }
+
+    // Gombok eseménykezelői
+    btnBiztosValasztok.addEventListener('click', () => {
+      currentKor = 'Biztos pártválasztók'; // Pontosan az 'adatok.json'-ban szereplő érték!
+      frissitDiagramot(currentKor);
+      btnBiztosValasztok.classList.add('active');
+      btnTeljesNepesseg.classList.remove('active');
+      // Ha vannak új gombok:
+      // btnFiatalok.classList.remove('active');
+      // btnIdosok.classList.remove('active');
+    });
+
+    btnTeljesNepesseg.addEventListener('click', () => {
+      currentKor = 'Teljes népesség'; // Pontosan az 'adatok.json'-ban szereplő érték!
+      frissitDiagramot(currentKor);
+      btnTeljesNepesseg.classList.add('active');
+      btnBiztosValasztok.classList.remove('active');
+      // Ha vannak új gombok:
+      // btnFiatalok.classList.remove('active');
+      // btnIdosok.classList.remove('active');
+    });
+
+    // Ha új kortartomány gombokat vezetsz be, ide add hozzá az eseménykezelőiket:
+    /*
+    btnFiatalok.addEventListener('click', () => {
+        currentKor = '18-30 év'; // Pontosan az 'adatok.json'-ban szereplő érték!
+        frissitDiagramot(currentKor);
+        btnFiatalok.classList.add('active');
+        btnBiztosValasztok.classList.remove('active');
+        btnTeljesNepesseg.classList.remove('active');
+        btnIdosok.classList.remove('active');
+    });
+    // ... és így tovább a többi gombhoz
+    */
+
+
+    // Kezdeti diagram rajzolás az alapértelmezett kategóriával
+    frissitDiagramot(currentKor);
+
+    // Frissítjük az oldal címét is a kutató nevére
+    const kutatoCimElem = document.getElementById('kutato-cim');
+    if (kutatoCimElem) {
+        kutatoCimElem.textContent = `${currentIntezet} Eredményei`;
+    }
+    document.title = `PollMonitor - Kutató: ${currentIntezet}`;
+  });
+  </script>
 </body>
 </html>

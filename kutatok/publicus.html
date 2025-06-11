@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PollMonitor - Közvéleménykutatás</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>PollMonitor</h1>
+    <p>A legfrissebb közvélemény-kutatási adatok egy helyen</p>
+  </header>
+
+  <nav class="main-nav">
+  <ul>
+    <li><a href="../index.html" id="nav-home">Főoldal</a></li>
+    <li><a href="cikkek.html" id="nav-cikkek">Cikkek</a></li> <li class="has-submenu">
+      <a href="#" id="nav-kutatok">Kutatóintézetek</a>
+      <ul class="submenu">
+        <li><a href="/kutatok/21kutato.html" id="nav-21kutato">21 Kutatóközpont</a></li>
+        <li><a href="/kutatok/idea.html" id="nav-idea">IDEA Intézet</a></li>
+        <li><a href="/kutatok/iranytu.html" id="nav-iranytu">Iránytű Intézet</a></li>
+        <li><a href="/kutatok/mtarskut.html" id="nav-mtarskut">Magyar Társadalomkutató</a></li>
+        <li><a href="/kutatok/median.html" id="nav-median">Medián</a></li>
+        <li><a href="/kutatok/nezopont.html" id="nav-nezopont">Nézőpont Intézet</a></li>
+        <li><a href="/kutatok/publicus.html" id="nav-publicus">Publicus Intézet</a></li>
+        <li><a href="/kutatok/republikon.html" id="nav-republikon">Republikon Intézet</a></li>
+        <li><a href="/kutatok/realpr93.html" id="nav-realpr93">REAL-PR 93. Közvéleménykutató</a></li>
+        <li><a href="/kutatok/szazadveg.html" id="nav-szazadveg">Századvég</a></li>
+        <li><a href="/kutatok/zavecz.html" id="nav-zavecz">Závecz Research</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+
+  <main>
+    <section class="kutato-leiras">
+        <div class="leiras-tartalom">
+            <h1 id="kutato-cim">Publicus</h1>
+            <p>
+                Rövid leírás a Publicus kutatóintézetről és a módszertanukról. 
+                Ez a rész bővíthető további információkkal, például a cég történetével, 
+                kulcsembereivel, vagy a felméréseik sajátosságaival. 
+                Fontos, hogy a felhasználók megértsék, milyen kontextusban értelmezzék 
+                az itt bemutatott adatokat.
+            </p>
+        </div>
+        <div class="kutato-logo-kontener">
+            <img id="kutato-logo" src="../logo/publicus_logo.png" alt="A közvéleménykutató intézet logója">
+        </div>
+    </section>
+
+    <section class="diagram-kontener">
+        <div class="diagram-fejlec">
+            <h2>Kutatási eredmények</h2>
+            <div id="datum-valaszto-kontener" class="valaszto-gombok">
+                </div>
+        </div>
+        
+        <div class="diagram-valaszto-box">
+            <div id="kor-valaszto-kontener" class="valaszto-gombok">
+                </div>
+            <h3 id="aktualis-diagram-cim"></h3>
+        </div>
+
+        <div class="diagram-canvas-kontener">
+            <canvas id="kutato-oszlop-diagram-canvas"></canvas>
+        </div>
+    </section>
+  </main>
+
+<script src="../kutatoOldal.js"></script>
+
+  <footer>
+    <p>&copy; 2025 PollMonitor – Minden jog fenntartva.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@2.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/date-fns@2.30.0/locale/hu/index.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+  <script src="js/charts.js"></script>
+
+</body>
+</html>

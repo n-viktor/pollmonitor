@@ -18,24 +18,34 @@ body {
 }
 
 /* Fejléc */
+/* Header stílusok */
 header {
-  background-color: #3F51B5; /* Mélyebb kék, anyagdizájn színpalettáról */
-  color: white;
-  padding: 3rem 2rem; /* Nagyobb padding */
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Finom árnyék */
+  background-color: #3F51B5; /* Sötétkék háttér */
+  color: #ffffff;
+  padding: 1rem 2rem; /* Felső/alsó és bal/jobb térköz */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  /* ÚJ: Középre igazítás */
+  display: flex; /* Flexbox konténerré tesszük a headert */
+  justify-content: center; /* Vízszintesen középre igazítja a tartalmat */
+  align-items: center; /* Függőlegesen középre igazítja a tartalmat (ha van magassága a headernek) */
 }
 
-header h1 {
-  font-family: 'Montserrat', sans-serif; /* Modern betűtípus a címekhez */
-  font-weight: 700; /* Vastagabb */
-  margin-bottom: 0.5rem;
-  font-size: 2.8rem; /* Nagyobb cím */
+/* Ha a .logo-link elemet is pontosítani szeretnéd, hogy ne foglaljon felesleges helyet */
+.logo-link {
+  display: flex; /* Ha a logó és a mottó is benne van, ez továbbra is fontos */
+  align-items: center;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  /* max-width: fit-content;  Ez segíthet, ha a logo-link túl széles lenne */
 }
 
-header p {
-  font-size: 1.1rem;
-  opacity: 0.9;
+/* A logó kép stílusa, ha szükséges */
+.header-logo {
+  height: 80px; /* Példaméret, állítsd be ízlés szerint */
+  width: auto;
+  display: block; /* Eltávolítja az extra margót az img alatt */
 }
 
 /* Fő tartalom terület */
@@ -103,24 +113,263 @@ footer {
   margin-top: 3rem; /* Távolság a fő tartalomtól */
 }
 
+/* --- Fő navigációs menü konténer --- */
+.main-nav {
+  background-color: #f8f9fa; /* Nagyon világos szürke háttér */
+  padding: 1rem 1.5rem; /* Enyhén több belső tér */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Jól látható, de finom árnyék */
+  border-radius: 10px; /* Kerekebb sarkok */
+  max-width: 1200px; /* Maximális szélesség a tartalomhoz igazítva */
+  margin: 1.5rem auto 2.5rem auto; /* Középre igazítás, alul és felül margó */
+  display: flex; /* Flexbox a belső elemek rendezéséhez */
+  justify-content: center; /* Középre igazítja a fő menüpontokat */
+}
+
+/* --- Fő menüpontok listája --- */
+.main-nav > ul { /* Közvetlen gyermek UL */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Flexbox a fő menüpontoknak */
+  gap: 1.5rem; /* Távolság a fő menüpontok között */
+  align-items: center; /* Középre igazítja az elemeket vertikálisan */
+  position: relative; /* Fontos az almenü pozícionálásához */
+}
+
+/* --- Fő menüpontok (LI elemek) --- */
+.main-nav > ul > li { /* Közvetlen gyermek LI */
+  position: relative; /* Relatív pozíció az almenü számára */
+}
+
+/* --- Fő menü linkek (A elemek) --- */
+.main-nav > ul > li > a { /* Közvetlen gyermek A */
+  text-decoration: none;
+  color: #3F51B5; /* Alapértelmezett kék szöveg */
+  font-weight: 700; /* Vastagabb betűtípus */
+  font-size: 1rem; /* Alap betűméret */
+  padding: 0.7rem 1.2rem; /* Belső tér a gombokon */
+  border-radius: 6px; /* Kerekített gombok */
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; /* Átmenetek */
+  white-space: nowrap; /* A szöveg ne törjön több sorba */
+  display: block; /* Hogy a padding működjön */
+}
+
+.main-nav > ul > li > a:hover {
+  background-color: #e0e7f7; /* Világosabb kék háttér hoverre */
+  color: #1A237E; /* Sötétebb kék szöveg hoverkor */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Finom árnyék hoverre */
+}
+
+/* --- Aktív menüpontok (JS által beállítva) --- */
+.main-nav > ul > li > a.active-nav-item, /* Főoldal link, ha aktív */
+.main-nav > ul > li > a.active-parent-item { /* "Kutatók" link, ha az almenüje aktív */
+    background-color: #3F51B5; /* Aktív háttér */
+    color: white; /* Aktív szöveg */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Erősebb árnyék aktív állapotban */
+}
+
+
+/* --- Almenü konténer --- */
+.submenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: absolute; /* Abszolút pozícionálás a szülő LI-hez képest */
+  top: 100%; /* Közvetlenül a szülő menüpont alatt */
+  left: 50%; /* Középre igazítás a szülőhöz képest */
+  transform: translateX(-50%); /* Elmozgatás a saját szélesség felével, hogy középen legyen */
+  background-color: #3F51B5; /* Sötétebb kék háttér az almenünek */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Jelentős árnyék */
+  border-radius: 8px; /* Kerekített sarkok */
+  min-width: 200px; /* Minimális szélesség */
+  z-index: 2000; /* Magas z-index, hogy a tartalom felett legyen */
+  display: none; /* Alapértelmezetten rejtett */
+  flex-direction: column; /* Az elemek függőlegesen helyezkedjenek el */
+  overflow: hidden; /* A kerekítés miatt ne lógjon ki a tartalom */
+}
+
+/* Almenü megjelenítése hoverre a szülőn */
+.has-submenu:hover > .submenu {
+  display: flex; /* Flexbox display, hogy az elemek rendezettek legyenek */
+}
+
+/* --- Almenü listaelemek --- */
+.submenu li {
+  width: 100%; /* Kitölti az almenü szélességét */
+}
+
+/* --- Almenü linkek --- */
+.submenu li a {
+  padding: 10px 15px; /* Belső tér az almenü linkeknek */
+  display: block; /* Hogy a teljes terület kattintható legyen */
+  color: white; /* Fehér szöveg */
+  font-weight: normal; /* Normál betűvastagság */
+  text-decoration: none; /* Eltávolítja az aláhúzást */
+  transition: background-color 0.2s ease, color 0.2s ease; /* Átmenetek */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15); /* Vékony elválasztó vonal */
+  white-space: nowrap; /* A szöveg ne törjön sorba */
+}
+
+/* Utolsó almenü elemnek nincs alul vonala */
+.submenu li:last-child a {
+  border-bottom: none;
+}
+
+/* Hover és aktív stílus az almenü linkekre */
+.submenu li a:hover,
+.submenu li a.active-submenu-item { /* JS által beállított aktív osztály */
+  background-color: #283593; /* Sötétebb kék hoverre és aktívra */
+  color: white;
+}
+
+/* Kutató leírás szekció */
+.kutato-leiras {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+
+    /* Flexbox a tartalom és a logó elrendezéséhez */
+    display: flex;
+    align-items: flex-start; /* Eltérő magasságú elemek tetejét igazítja */
+    gap: 2rem; /* Távolság a leírás és a logó között */
+}
+
+.kutato-leiras .leiras-tartalom {
+    flex-grow: 1; /* A leírás vegye fel a rendelkezésre álló helyet */
+}
+
+.kutato-leiras h1 {
+    color: #3F51B5;
+    text-align: left; /* Balra igazítjuk a címet */
+    margin-bottom: 1rem;
+    font-size: 2em;
+}
+
+.kutato-leiras p {
+    color: #555;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* Logó konténer és kép stílusa */
+.kutato-logo-kontener {
+    flex-shrink: 0; /* Ne zsugorodjon a logó konténer */
+    /* Módosítva: Állítsuk a konténer méretét, hogy a kép beleférjen, de ne legyen túl nagy */
+    width: 160px; /* Például 160px szélesség */
+    height: 160px; /* És 160px magasság, hogy négyzet alakú legyen, ha a logó is az */
+    display: flex; /* Középre igazítás a konténeren belül */
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem; /* Kisebb belső tér, hogy a kép jobban kitöltse */
+    border: 1px solid #eee; /* Keret a logó körül */
+    border-radius: 8px; /* Lekerekített sarkok */
+    background-color: #f9f9f9; /* Világos háttér */
+    overflow: hidden; /* Ha a kép nagyobb, mint a konténer, vágja le a kilógó részeket */
+}
+
+.kutato-logo-kontener img {
+    max-width: 100%; /* A kép ne lógjon ki a konténerből */
+    max-height: 100%; /* A kép ne lógjon ki a konténerből vertikálisan */
+    width: auto; /* Tartsa meg az arányokat */
+    height: auto; /* Tartsa meg az arányokat */
+    display: block; /* Eltávolítja az extra helyet az img alatt */
+    object-fit: contain; /* Biztosítja, hogy a kép beleférjen a konténerbe anélkül, hogy eltorzulna */
+}
+
+/* Diagram konténer (ha még nincs) */
+.diagram-kontener {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+}
+
+/* Diagram fejléc (ha még nincs) */
+.diagram-fejlec {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.diagram-fejlec h2 {
+    color: #3F51B5;
+    font-size: 1.8em;
+    margin-bottom: 1.2rem;
+}
+
+/* Új: Választó gombok konténerek */
+.valaszto-gombok {
+    display: flex;
+    flex-wrap: wrap; /* Hogy törhessenek sorba */
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 1.5rem; /* Távolság a diagramtól vagy következő szekciótól */
+}
+
+/* Új: Gombok stílusa */
+.valaszto-gombok button {
+    background-color: #e0e7f7; /* Világos kék háttér */
+    color: #3F51B5; /* Kék szöveg */
+    border: 1px solid #3F51B5; /* Kék szegély */
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px; /* Lekerekített gombok */
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    white-space: nowrap; /* Ne törjön sorba a gomb szövege */
+}
+
+.valaszto-gombok button:hover {
+    background-color: #c5d7f7;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.valaszto-gombok button.active {
+    background-color: #3F51B5;
+    color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-color: #3F51B5;
+}
+
+/* Új: Konténer a kor kategória váltó gomboknak és aktuális címnek */
+.diagram-valaszto-box {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #eee; /* Elválasztó vonal a dátum gombok és a diagram között */
+    padding-bottom: 1.5rem;
+}
+
+.diagram-valaszto-box h3 {
+    color: #4CAF50; /* Zöldes cím az aktuális diagramnak */
+    font-size: 1.4em;
+    margin-top: 1rem;
+}
+
+/* Diagram canvas konténer (ha még nincs) */
+.diagram-canvas-kontener {
+    position: relative;
+    width: 100%;
+    height: 450px; /* Magasabb diagramokhoz */
+    margin-top: 2rem; /* Távolság az aktuális cím és a diagram között */
+}
+
 /* Reszponzív design kisebb képernyőkre */
 @media (max-width: 768px) {
   header {
     padding: 2rem 1rem;
   }
 
-  header h1 {
-    font-size: 2.2rem;
-  }
-
-  main {
-    padding: 1.5rem 1rem;
-  }
-
-  h2 {
-    font-size: 1.6rem;
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
+  .header-logo {
+    height: 40px; /* Kicsit kisebb logó mobilnézeten */
   }
 
   #legfrissebb {
@@ -136,6 +385,105 @@ footer {
   .chart-container-large {
     height: 380px; /* Kisebb magasság a nagy diagramnak mobil nézeten */
   }
+
+  .main-nav {
+        padding: 0.5rem 1rem; /* Kisebb padding mobilnézeten */
+        margin-left: 1rem;
+        margin-right: 1rem;
+        border-radius: 8px; /* Megtartja a kerekítést */
+    }
+
+    .main-nav > ul {
+        flex-direction: column; /* Függőleges elrendezés */
+        align-items: stretch; /* Széthúzza a linkeket a konténer teljes szélességére */
+        gap: 0; /* Nincs távolság a fő menüpontok között */
+    }
+
+    .main-nav > ul > li {
+        width: 100%; /* Minden fő menüpont teljes szélességben */
+        text-align: center; /* Szöveg középre igazítása */
+    }
+
+    .main-nav > ul > li > a {
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+        border-radius: 0; /* Nincs kerekítés a gombokon, egymás alá kerülnek */
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Elválasztó vonal a fő menüpontok között */
+    }
+    .main-nav > ul > li:last-child > a { /* Utolsó fő menüpontnak nincs alul vonala */
+        border-bottom: none;
+    }
+
+    /* Különleges lekerekítés mobilnézeten a főmenü elején és végén */
+    .main-nav > ul > li:first-child > a {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+    .main-nav > ul > li:last-child > a {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+
+
+    /* Almenü mobilnézeten (kattintásra jelenik meg, nem hoverre) */
+    .submenu {
+        position: static; /* Statikus pozíció, a normál folyamban jelenik meg */
+        width: 100%; /* Kitölti a szülő szélességét */
+        background-color: #5C6BC0; /* Enyhén világosabb kék háttér */
+        box-shadow: none; /* Nincs árnyék */
+        border-radius: 0; /* Nincs kerekítés */
+        margin-top: 0; /* Nincs felső margó */
+        display: none; /* JS által vezérelve van elrejtve/megjelenítve */
+        border-top: 1px solid rgba(255, 255, 255, 0.2); /* Kis elválasztó a szülő főmenüponttól */
+    }
+
+    .submenu li a {
+      padding: 10px 15px; /* Belső tér az almenü linkeknek */
+      display: block; /* Hogy a teljes terület kattintható legyen */
+      color: white; /* Fehér szöveg */
+      font-weight: normal; /* Normál betűvastagság */
+      text-decoration: none; /* Eltávolítja az aláhúzást */
+      transition: background-color 0.2s ease, color 0.2s ease; /* Átmenetek */
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15); /* Vékony elválasztó vonal */
+      white-space: nowrap; /* A szöveg ne törjön sorba */
+    }
+    .submenu li:last-child a {
+      border-bottom: none;
+    }
+
+    .submenu li a.active-submenu-item {
+        background-color: #7986CB !important; /* Más árnyalat az aktív almenü elemnek mobilnézeten */
+    }
+
+    .kutato-leiras {
+        flex-direction: column; /* Mobilnézeten egymás alá kerülnek */
+        align-items: center; /* Középre igazítás */
+        text-align: center;
+    }
+    .kutato-leiras h1 {
+        text-align: center; /* Középre igazítjuk a címet mobilnézeten */
+    }
+    .kutato-logo-kontener {
+        width: 100px; /* Kisebb logó konténer mobilnézeten */
+        height: 100px; /* Kisebb logó konténer mobilnézeten */
+        margin-top: 1rem; /* Távolság a leírástól */
+    }
+}
+
+@media (max-width: 600px) {
+    .kutato-leiras, .diagram-kontener {
+        padding: 1rem;
+    }
+    .diagram-fejlec h2 {
+        font-size: 1.5em;
+    }
+    .valaszto-gombok button {
+        padding: 0.5rem 1rem;
+        font-size: 0.8em;
+    }
+    .diagram-canvas-kontener {
+        height: 350px; /* Kisebb magasság mobilnézeten */
+    }
 }
 
 @media (max-width: 480px) {
@@ -150,4 +498,70 @@ footer {
   .chart-container {
     height: 280px; /* Finomhangolás a legkisebb képernyőkre */
   }
+
+      .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 0; /* Nincs gap mobilnézeten */
+    }
+
+    .main-nav li {
+        width: 100%; /* Minden fő menüpont teljes szélességben */
+        text-align: center;
+    }
+
+    .main-nav li a {
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+        display: block;
+        border-radius: 0; /* Mobilnézeten nincs kerekítés a fő nav linkeken */
+    }
+    .main-nav li:first-child a {
+        border-top-left-radius: 8px; /* Top lekerekítés a fő nav első elemének */
+        border-top-right-radius: 8px;
+    }
+
+    /* Almenü mobilnézeten (kattintásra jelenik meg) */
+    .submenu {
+        position: static; /* Statikus pozíció a normál áramlásban */
+        width: 100%;
+        background-color: #5C6BC0; /* Enyhén világosabb kék az almenünek mobilnézeten */
+        box-shadow: none;
+        border-radius: 0; /* Nincs lekerekítés mobil almenüben */
+        margin-top: 0; /* Nincs távolság */
+        display: none; /* JS-el kell megjeleníteni */
+        border-top: 1px solid rgba(255, 255, 255, 0.2); /* Kis elválasztó fent */
+    }
+
+    .submenu li a {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+        background-color: transparent !important; /* Felülírja az aktív színt mobil almenüben */
+        color: white;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .submenu li:last-child a {
+      border-bottom: none;
+    }
+
+    .submenu li a.active-submenu-item {
+        background-color: #7986CB !important; /* Más árnyalat az aktív almenü elemnek mobilnézeten */
+    }
+
+    /* Kattintásra megjelenő/eltűnő almenü (JS-hez) */
+    .has-submenu.active-mobile-submenu > .submenu {
+        display: flex;
+    }
+    /* Aktív szülő menüpont mobilnézeten, ha az almenü nyitva van */
+    .has-submenu.active-mobile-submenu > a {
+        background-color: #3F51B5; /* Maradjon aktív színű, amikor nyitva van */
+        color: white;
+        border-bottom-left-radius: 0; /* Ne kerekedjen alul */
+        border-bottom-right-radius: 0;
+    }
+    /* Ha az utolsó eleme a navi menünek, és nyitva van, annak is legyen lekerekítés felül */
+    .main-nav li.has-submenu.active-mobile-submenu:last-child {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
 }

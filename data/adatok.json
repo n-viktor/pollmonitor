@@ -621,5 +621,19 @@
       "Egyéb párt": 9,
       "Bizonytalan/NT/NV": 24
     }
+  },
+  {
+    "intezet": "Real-PR 93.",
+    "datum": "2024-11-27",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 36,
+      "Fidesz-KDNP": 44,
+      "DK": 5,
+      "Mi Hazánk": 7,
+      "MKKP": 3,
+      "Egyéb párt": 5
+    }
   }
 ]

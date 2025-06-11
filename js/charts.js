@@ -310,7 +310,7 @@ function rajzolTrendPontdiagram(canvasId) {
                 autoSkip: true, // Hagyjuk, hogy a Chart.js kihagyja, ha túl sok lenne
                 maxTicksLimit: 29, // Max. 10 felirat az X tengelyen
                 font: {
-                  size: 10 // Kisebb betűméret a napi feliratoknak
+                  size: 11 // Kisebb betűméret a napi feliratoknak
                 }
               }
             },
@@ -357,7 +357,7 @@ function rajzolTrendPontdiagram(canvasId) {
                         label = label.replace(' (Pontok)', '') + ': ';
                       }
                       if (context.parsed.y !== null) {
-                        label += context.parsed.y.toFixed(1) + '%';
+                        label += context.parsed.y.toFixed(0) + '%';
                       }
                       if (context.raw.intezet) {
                         label += ` (${context.raw.intezet})`;
