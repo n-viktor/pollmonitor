@@ -237,6 +237,7 @@ function rajzolTrendPontdiagram(canvasId) {
     });
 }
 
+
 window.addEventListener("DOMContentLoaded", () => {
   rajzolLegfrissebbOszlopdiagramok();
   rajzolTrendPontdiagram("trend-canvas");
