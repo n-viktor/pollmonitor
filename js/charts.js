@@ -4,65 +4,42 @@ function randomColor() {
 }
 
 function rajzolLegfrissebbOszlopdiagramok() {
-  fetch("data/adatok.json")
-    .then(res => res.json())
-    .then(data => {
-      const filtered = data
-        .filter(p => p.kor === "biztos pártválasztók")
-        .sort((a, b) => new Date(b.datum) - new Date(a.datum))
-        .slice(0, 3);
+  fetch('data/adatok.json')
+  .then(res => res.json())
+  .then(data => {
+    const filtered = data
+      .filter(k => k.kor === "biztos pártválasztók")
+      .sort((a, b) => new Date(b.datum) - new Date(a.datum))
+      .slice(0, 3);
 
-      filtered.forEach((kutatas, index) => {
-        const parties = Object.keys(kutatas.eredmenyek);
-        const values = parties.map(p => kutatas.eredmenyek[p]);
-
-        const canvas = document.getElementById(`legfrissebb-canvas-${index}`);
-        if (!canvas) {
-          console.error(`Nem található canvas: legfrissebb-canvas-${index}`);
-          return;
-        }
-        const ctx = canvas.getContext('2d');
-        if (!ctx) {
-          console.error(`Nem lehet 2D kontextust szerezni: legfrissebb-canvas-${index}`);
-          return;
-        }
-
-        new Chart(ctx, {
-          type: "bar",
-          data: {
-            labels: parties,
-            datasets: [{
-              label: `${kutatas.intezet} (${kutatas.datum})`,
-              data: values,
-              backgroundColor: randomColor()
-            }]
-          },
-          options: {
-            responsive: false,
-            plugins: {
-              title: {
-                display: true,
-                text: `${kutatas.intezet} - ${kutatas.datum}`
-              },
-              legend: {
-                display: false
-              }
+    filtered.forEach((kutatas, i) => {
+      const ctx = document.getElementById(`chart${i}`).getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: Object.keys(kutatas.eredmenyek),
+          datasets: [{
+            label: `${kutatas.intezet} (${kutatas.datum})`,
+            data: Object.values(kutatas.eredmenyek),
+            backgroundColor: 'rgba(54, 162, 235, 0.7)'
+          }]
+        },
+        options: {
+          responsive: false,
+          plugins: {
+            title: {
+              display: true,
+              text: `${kutatas.intezet} - ${kutatas.datum}`
             },
-            scales: {
-              y: {
-                min: 0,
-                max: 100,
-                ticks: {
-                  stepSize: 10,
-                  callback: val => val + '%'
-                }
-              }
-            }
+            legend: { display: false }
+          },
+          scales: {
+            y: { min: 0, max: 100 }
           }
-        });
+        }
       });
-    })
-    .catch(err => console.error("Hiba a JSON betöltésekor:", err));
+    });
+  });
 }
 
 function rajzolTrendPontdiagram(canvasId) {
