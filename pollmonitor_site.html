@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PollMonitor</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="js/charts.js"></script>
+</head>
+<body>
+  <header>
+    <h1>PollMonitor</h1>
+    <p>A legfrissebb közvélemény-kutatási adatok egy helyen</p>
+  </header>
+
+  <main>
+    <section id="latest-polls">
+      <h2>Friss kutatások</h2>
+      <div id="poll-list">
+        <!-- JavaScript tölti be ide az adatokat -->
+      </div>
+    </section>
+
+    <section id="trend-chart">
+      <h2>Trendek</h2>
+      <canvas id="trendCanvas" width="800" height="400"></canvas>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 PollMonitor – Minden jog fenntartva.</p>
+  </footer>
+</body>
+</html>
