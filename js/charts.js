@@ -23,14 +23,23 @@ function rajzolLegfrissebbOszlopdiagramok() {
 
       filtered.forEach((kutatas, i) => {
         const ctx = document.getElementById(`chart${i}`).getContext('2d');
+
+        // Pártok rendezése csökkenő sorrendbe az eredmények alapján
+        const sortedParties = Object.entries(kutatas.eredmenyek)
+          .sort(([, valueA], [, valueB]) => valueB - valueA);
+
+        const labels = sortedParties.map(([key]) => key);
+        const values = sortedParties.map(([, value]) => value);
+        const backgroundColors = sortedParties.map(([key]) => randomColor(key));
+
         new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: Object.keys(kutatas.eredmenyek),
+            labels: labels, // Már rendezett címkék
             datasets: [{
               label: `${kutatas.intezet} (${kutatas.datum})`,
-              data: Object.values(kutatas.eredmenyek),
-              backgroundColor: Object.keys(kutatas.eredmenyek).map(p => randomColor(p))
+              data: values, // Már rendezett adatok
+              backgroundColor: backgroundColors // Már rendezett színek
             }]
           },
           options: {
