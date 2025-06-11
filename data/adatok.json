@@ -1,0 +1,54 @@
+[
+  {
+    "intezet": "Závecz",
+    "datum": "2025-06-01",
+    "tema": "Pártpreferencia",
+    "kor": "teljes népesség",
+    "eredmenyek": {
+      "Fidesz": 42,
+      "DK": 16,
+      "Mi Hazánk": 10,
+      "Momentum": 7,
+      "Egyéb": 25
+    }
+  },
+  {
+    "intezet": "Závecz",
+    "datum": "2025-06-01",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Fidesz": 48,
+      "DK": 18,
+      "Mi Hazánk": 11,
+      "Momentum": 6,
+      "Egyéb": 17
+    }
+  },
+  {
+    "intezet": "IDEA",
+    "datum": "2025-06-01",
+    "tema": "Pártpreferencia",
+    "kor": "teljes népesség",
+    "eredmenyek": {
+      "Fidesz": 40,
+      "DK": 18,
+      "Mi Hazánk": 9,
+      "Momentum": 6,
+      "Egyéb": 27
+    }
+  },
+  {
+    "intezet": "IDEA",
+    "datum": "2025-06-01",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Fidesz": 44,
+      "DK": 20,
+      "Mi Hazánk": 10,
+      "Momentum": 5,
+      "Egyéb": 21
+    }
+  }
+]
