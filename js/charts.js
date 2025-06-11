@@ -85,7 +85,6 @@ function rajzolLegfrissebbOszlopdiagramok() {
     });
 }
 
-
 function rajzolTrendPontdiagram(canvasId) {
   fetch("data/adatok.json")
     .then(res => res.json())
@@ -113,26 +112,25 @@ function rajzolTrendPontdiagram(canvasId) {
         });
       });
 
-      // Pontok (scatter) – csak pontok, nincs összekötés
       const scatterDatasets = parties.map(party => ({
         label: party,
+        type: 'scatter',
         data: pointsPerParty[party],
         showLine: false,
         borderColor: 'transparent',
-        backgroundColor: randomColor(party), // szín pártra
+        backgroundColor: randomColor(party),
         pointRadius: 5,
       }));
 
-      // Trendvonal (line) – egyenes vonal a regresszió alapján
       const lineDatasets = parties.map(party => ({
         label: party + " trendvonal",
+        type: 'line', // FONTOS: ez a kulcs, hogy vonalat rajzoljon
         data: linearRegression(pointsPerParty[party]),
-        showLine: true,          // FONTOS: meg kell jelenjen a vonal
         fill: false,
         borderColor: scatterDatasets.find(d => d.label === party).backgroundColor,
         backgroundColor: 'transparent',
-        pointRadius: 0,          // pontok ne legyenek a vonalon
-        tension: 0,              // egyenes vonal
+        pointRadius: 0,
+        tension: 0,
         borderWidth: 2,
         datalabels: { display: false }
       }));
@@ -140,31 +138,31 @@ function rajzolTrendPontdiagram(canvasId) {
       const datasets = [...scatterDatasets, ...lineDatasets];
 
       new Chart(document.getElementById(canvasId), {
-        type: "scatter",
+        type: 'scatter', // scatter típus kell, hogy az x idő legyen
         data: { datasets },
         options: {
           responsive: true,
           scales: {
             x: {
-              type: "time",
-              time: { unit: "month", tooltipFormat: "yyyy-MM-dd" },
-              title: { display: true, text: "Dátum" }
+              type: 'time',
+              time: { unit: 'month', tooltipFormat: 'yyyy-MM-dd' },
+              title: { display: true, text: 'Dátum' }
             },
             y: {
               min: 0,
               max: 100,
-              title: { display: true, text: "%" }
+              title: { display: true, text: '%' }
             }
           },
           plugins: {
             title: {
               display: true,
-              text: "Elmúlt 6 hónap eredményei – biztos pártválasztók"
+              text: 'Elmúlt 6 hónap eredményei – biztos pártválasztók'
             },
             legend: {
-              position: "bottom",
+              position: 'bottom',
               labels: {
-                filter: (item) => !item.text.includes("trendvonal") // trendvonalakat ne listázza a legenda
+                filter: item => !item.text.includes('trendvonal')
               }
             }
           }
@@ -172,7 +170,6 @@ function rajzolTrendPontdiagram(canvasId) {
       });
     });
 }
-
 
 
 window.addEventListener("DOMContentLoaded", () => {
