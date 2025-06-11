@@ -25,38 +25,27 @@ function linearRegression(data) {
   ];
 }
 
-function rajzolLegfrissebbOszlopdiagramok(containerId) {
-  fetch("data/adatok.json")
+
+function rajzolLegfrissebbOszlopdiagramok() {
+  fetch('data/adatok.json')
     .then(res => res.json())
     .then(data => {
       const filtered = data
-        .filter(p => p.kor === "biztos pártválasztók")
+        .filter(k => k.kor === "biztos pártválasztók")
         .sort((a, b) => new Date(b.datum) - new Date(a.datum))
         .slice(0, 3);
 
-      const container = document.getElementById(containerId);
-      container.innerHTML = ""; // tisztítjuk a konténert
-
-      filtered.forEach((kutatas, index) => {
-        const canvas = document.createElement("canvas");
-        canvas.id = "legfrissebb-canvas-" + index;
-        canvas.width = 300;
-        canvas.height = 300;
-        canvas.style.marginRight = "20px";
-        container.appendChild(canvas);
-
-        const parties = Object.keys(kutatas.eredmenyek);
-        const dataSet = {
-          label: `${kutatas.intezet} (${kutatas.datum})`,
-          data: parties.map(p => kutatas.eredmenyek[p]),
-          backgroundColor: randomColor()
-        };
-
-        new Chart(canvas.getContext("2d"), {
-          type: "bar",
+      filtered.forEach((kutatas, i) => {
+        const ctx = document.getElementById(`chart${i}`).getContext('2d');
+        new Chart(ctx, {
+          type: 'bar',
           data: {
-            labels: parties,
-            datasets: [dataSet]
+            labels: Object.keys(kutatas.eredmenyek),
+            datasets: [{
+              label: `${kutatas.intezet} (${kutatas.datum})`,
+              data: Object.values(kutatas.eredmenyek),
+              backgroundColor: 'rgba(54, 162, 235, 0.7)'
+            }]
           },
           options: {
             responsive: false,
@@ -68,23 +57,19 @@ function rajzolLegfrissebbOszlopdiagramok(containerId) {
               legend: { display: false }
             },
             scales: {
-              y: {
-                min: 0,
-                max: 100,
-                ticks: { stepSize: 10 },
-                title: { display: true, text: "%" }
-              }
+              y: { min: 0, max: 100 }
             }
           }
         });
       });
     });
-}
+  }
 
 function rajzolTrendPontdiagram(canvasId) {
   fetch("data/adatok.json")
     .then(res => res.json())
     .then(data => {
+      const most = new Date();
       const hatHonap = new Date();
       hatHonap.setMonth(hatHonap.getMonth() - 6);
 
@@ -93,7 +78,7 @@ function rajzolTrendPontdiagram(canvasId) {
         new Date(p.datum) >= hatHonap
       );
 
-      if (filtered.length === 0) return;
+      if(filtered.length === 0) return;
 
       const parties = Object.keys(filtered[0].eredmenyek);
       const pointsPerParty = {};
@@ -108,33 +93,33 @@ function rajzolTrendPontdiagram(canvasId) {
         });
       });
 
-      // Pontok scatter típusra, vonal nélkül
+      // Dataset pontokhoz (scatter, csak pontok)
       const scatterDatasets = parties.map(party => ({
         label: party,
         data: pointsPerParty[party],
-        type: "scatter",
-        showLine: false,
+        showLine: false, // ne kötődjön össze
         borderColor: 'transparent',
         backgroundColor: randomColor(),
         pointRadius: 5,
       }));
 
-      // Trendvonal line típusra, egyenes vonal (lineáris regresszió)
+      // Dataset trendvonalhoz (line, két pont a regresszióból)
       const lineDatasets = parties.map(party => ({
         label: party + " trendvonal",
         data: linearRegression(pointsPerParty[party]),
-        type: "line",
         fill: false,
         borderColor: scatterDatasets.find(d => d.label === party).backgroundColor,
         backgroundColor: 'transparent',
         pointRadius: 0,
-        tension: 0,
+        tension: 0, // egyenes vonal
         borderWidth: 2,
+        datalabels: { display: false }
       }));
 
       const datasets = [...scatterDatasets, ...lineDatasets];
 
       new Chart(document.getElementById(canvasId), {
+        type: "scatter",
         data: {
           datasets
         },
@@ -163,7 +148,7 @@ function rajzolTrendPontdiagram(canvasId) {
             legend: {
               position: "bottom",
               labels: {
-                filter: (item) => !item.text.includes("trendvonal")
+                filter: (item) => !item.text.includes("trendvonal") // trendvonalakat ne listázza a legenda
               }
             }
           }
@@ -172,8 +157,8 @@ function rajzolTrendPontdiagram(canvasId) {
     });
 }
 
-// Automatikus inicializálás, ha DOM betöltődött
+
 window.addEventListener("DOMContentLoaded", () => {
-  rajzolLegfrissebbOszlopdiagramok("legfrissebb-container");
+  rajzolLegfrissebbOszlopdiagramok();
   rajzolTrendPontdiagram("trend-canvas");
 });
