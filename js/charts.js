@@ -98,16 +98,11 @@ function rajzolTrendPontdiagram(canvasId) {
         new Date(p.datum) >= hatHonap
       );
 
-      if (filtered.length === 0) return;
+      if(filtered.length === 0) return;
 
       const parties = Object.keys(filtered[0].eredmenyek);
       const pointsPerParty = {};
-      const colorMap = {}; // << új objektum a színek tárolására
-
-      parties.forEach(p => {
-        pointsPerParty[p] = [];
-        colorMap[p] = randomColor(p); // << egyszer tároljuk a színt
-      });
+      parties.forEach(p => pointsPerParty[p] = []);
 
       filtered.forEach(kutatas => {
         parties.forEach(p => {
@@ -118,23 +113,26 @@ function rajzolTrendPontdiagram(canvasId) {
         });
       });
 
+      // Pontok (scatter) – csak pontok, nincs összekötés
       const scatterDatasets = parties.map(party => ({
         label: party,
         data: pointsPerParty[party],
         showLine: false,
         borderColor: 'transparent',
-        backgroundColor: colorMap[party], // fix szín innen
+        backgroundColor: randomColor(party), // szín pártra
         pointRadius: 5,
       }));
 
+      // Trendvonal (line) – egyenes vonal a regresszió alapján
       const lineDatasets = parties.map(party => ({
         label: party + " trendvonal",
         data: linearRegression(pointsPerParty[party]),
+        showLine: true,          // FONTOS: meg kell jelenjen a vonal
         fill: false,
-        borderColor: colorMap[party], // ugyanaz a szín
+        borderColor: scatterDatasets.find(d => d.label === party).backgroundColor,
         backgroundColor: 'transparent',
-        pointRadius: 0,
-        tension: 0,
+        pointRadius: 0,          // pontok ne legyenek a vonalon
+        tension: 0,              // egyenes vonal
         borderWidth: 2,
         datalabels: { display: false }
       }));
@@ -143,18 +141,13 @@ function rajzolTrendPontdiagram(canvasId) {
 
       new Chart(document.getElementById(canvasId), {
         type: "scatter",
-        data: {
-          datasets
-        },
+        data: { datasets },
         options: {
           responsive: true,
           scales: {
             x: {
               type: "time",
-              time: {
-                unit: "month",
-                tooltipFormat: "yyyy-MM-dd"
-              },
+              time: { unit: "month", tooltipFormat: "yyyy-MM-dd" },
               title: { display: true, text: "Dátum" }
             },
             y: {
@@ -171,7 +164,7 @@ function rajzolTrendPontdiagram(canvasId) {
             legend: {
               position: "bottom",
               labels: {
-                filter: (item) => !item.text.includes("trendvonal")
+                filter: (item) => !item.text.includes("trendvonal") // trendvonalakat ne listázza a legenda
               }
             }
           }
@@ -179,6 +172,7 @@ function rajzolTrendPontdiagram(canvasId) {
       });
     });
 }
+
 
 
 window.addEventListener("DOMContentLoaded", () => {
