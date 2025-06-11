@@ -82,7 +82,8 @@ function rajzolTrendPontdiagram(canvasId) {
         parties.forEach(p => {
           pointsPerParty[p].push({
             x: kutatas.datum,
-            y: kutatas.eredmenyek[p]
+            y: kutatas.eredmenyek[p],
+            intezet: kutatas.intezet // Itt adtam hozzá az intézet nevét a ponthoz
           });
         });
       });
@@ -121,6 +122,24 @@ function rajzolTrendPontdiagram(canvasId) {
             },
             legend: {
               position: 'bottom'
+            },
+            tooltip: { // Itt módosítottam a tooltip beállításokat
+              callbacks: {
+                label: function(context) {
+                  let label = context.dataset.label || '';
+                  if (label) {
+                    label += ': ';
+                  }
+                  if (context.parsed.y !== null) {
+                    label += context.parsed.y + '%';
+                  }
+                  // Hozzáadjuk az intézet nevét
+                  if (context.raw.intezet) {
+                    label += ` (${context.raw.intezet})`;
+                  }
+                  return label;
+                }
+              }
             }
           }
         }
