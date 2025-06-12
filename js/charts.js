@@ -248,7 +248,7 @@ function rajzolTrendPontdiagram(canvasId) {
     .then(res => res.json())
     .then(data => {
       const hatHonap = new Date();
-      hatHonap.setMonth(hatHonap.getMonth() - 6);
+      hatHonap.setMonth(hatHonap.getMonth() - 12);
       hatHonap.setHours(0, 0, 0, 0); // Pontosan a nap elejére állítjuk
 
       const filtered = data.filter(p =>
@@ -289,7 +289,7 @@ function rajzolTrendPontdiagram(canvasId) {
         const interpolatedDailyData = interpolateDailyData(pointsPerParty[party]);
 
         // Majd az interpolált adatokra alkalmazzuk a mozgóátlagot
-        const trendData = calculateMovingAverage(interpolatedDailyData, 7); // Mozgóátlag ablakmérete, pl. 7 nap
+        const trendData = calculateMovingAverage(interpolatedDailyData, 30); // Mozgóátlag ablakmérete, pl. 7 nap
 
         return {
           label: `${party} (Trend)`,

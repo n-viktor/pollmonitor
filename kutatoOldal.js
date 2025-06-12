@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         // Cím frissítése
-        diagramCimElem.textContent = `Eredmények: ${new Date(aktualisDatum).toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: 'numeric' })} (${capitalizeFirstLetter(aktualisKor)})`;
+        diagramCimElem.textContent = `${new Date(aktualisDatum).toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: 'numeric' })} (${capitalizeFirstLetter(aktualisKor)})`;
 
         // Itt már az 'eredmenyek' kulcsot használjuk
         const eredmenyekObj = aktualisAdat.eredmenyek;

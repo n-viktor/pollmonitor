@@ -736,17 +736,17 @@ footer {
     }
 
     .countdown-section h2 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
     .countdown-timer {
-        gap: 1rem;
+        gap: 0.3rem;
     }
     .countdown-item {
-        min-width: 90px;
+        min-width: 40px;
         padding: 0.8rem 1rem;
     }
     .countdown-item span:first-child {
-        font-size: 2.5rem;
+        font-size: 1.6rem;
     }
     .countdown-item .label {
         font-size: 0.8rem;
@@ -792,6 +792,9 @@ footer {
   .submenu {
       position: static; /* Statikus pozíció a normál áramlásban */
       width: 100%;
+      left: auto;
+      right: auto;
+      transform: none;
       background-color: #5C6BC0; /* Enyhén világosabb kék az almenünek mobilnézeten */
       box-shadow: none;
       border-radius: 0; /* Nincs lekerekítés mobil almenüben */
