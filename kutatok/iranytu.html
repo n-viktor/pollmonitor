@@ -52,8 +52,16 @@
     </section>
 
     <section class="diagram-kontener">
+      <h2>Támogatottsági adatok 2024. áprilisától (biztos pártválasztók)</h2>
+      <div class="diagram-canvas-kontener">
+        <canvas id="iranytu-canvas"></canvas>
+      </div>
+      <h6>A pártok átlagát 30 napos mozgóátlaggal szemléltetjük. • Grafikon: PollMonitor.hu</h6>
+    </section>
+
+    <section class="diagram-kontener">
         <div class="diagram-fejlec">
-            <h2>Kutatási eredmények</h2>
+            <h2>Az Iránytű közvéleménykutatásai</h2>
             <div id="datum-valaszto-kontener" class="valaszto-gombok">
                 </div>
         </div>
@@ -82,7 +90,15 @@
   <script src="https://cdn.jsdelivr.net/npm/date-fns@2.30.0/locale/hu/index.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
-  <script src="js/charts.js"></script>
+    <script src="/js/charts.js"></script>
+
+<script src="/js/kutato_charts.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      rajzolIntezetTrendDiagram("iranytu-canvas", "Iránytű");
+    });
+
+  </script>
 
 </body>
 </html>

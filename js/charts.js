@@ -19,7 +19,7 @@ function randomColor(party) {
 }
 
 function rajzolLegfrissebbOszlopdiagramok() {
-  fetch('data/adatok.json')
+  fetch('/data/adatok.json')
     .then(res => res.json())
     .then(data => {
       const filtered = data
@@ -244,11 +244,11 @@ function calculateMovingAverage(data, windowSize) {
 
 // --- rajzolTrendPontdiagram függvény módosítása ---
 function rajzolTrendPontdiagram(canvasId) {
-  fetch("data/adatok.json")
+  fetch("/data/adatok.json")
     .then(res => res.json())
     .then(data => {
       const hatHonap = new Date();
-      hatHonap.setMonth(hatHonap.getMonth() - 12);
+      hatHonap.setMonth(hatHonap.getMonth() - 13);
       hatHonap.setHours(0, 0, 0, 0); // Pontosan a nap elejére állítjuk
 
       const filtered = data.filter(p =>
@@ -326,7 +326,7 @@ function rajzolTrendPontdiagram(canvasId) {
                 autoSkip: true, // Hagyjuk, hogy a Chart.js kihagyja, ha túl sok lenne
                 maxTicksLimit: 29, // Max. 10 felirat az X tengelyen
                 font: {
-                  size: 11 // Kisebb betűméret a napi feliratoknak
+                  size: 12 // Kisebb betűméret a napi feliratoknak
                 }
               }
             },
