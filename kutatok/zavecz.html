@@ -101,6 +101,29 @@
     });
 
   </script>
-
+<div id="floating-countdown-container" class="floating-countdown-container">
+    <button id="close-countdown-btn" class="close-countdown-btn" aria-label="Visszaszámláló bezárása">&times;</button>
+    <h3 class="floating-countdown-title">VÁLASZTÁS 2026</h3>
+    <div class="floating-countdown-timer" id="floating-countdown-timer">
+        <div class="countdown-item">
+            <span id="floating-days">00</span>
+            <span class="label">nap</span>
+        </div>
+        <div class="countdown-item">
+            <span id="floating-hours">00</span>
+            <span class="label">óra</span>
+        </div>
+        <div class="countdown-item">
+            <span id="floating-minutes">00</span>
+            <span class="label">perc</span>
+        </div>
+        <div class="countdown-item">
+            <span id="floating-seconds">00</span>
+            <span class="label">mp</span>
+        </div>
+    </div>
+    <p id="floating-countdown-message" class="floating-countdown-message"></p>
+  </div>
+  <script src="/countdown.js"></script>
 </body>
 </html>

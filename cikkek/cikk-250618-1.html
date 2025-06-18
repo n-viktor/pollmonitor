@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PollMonitor: Republikon</title>
+  <title>PollMonitor: Cikkek</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="/css/style.css" />
   <link rel="shortcut icon" type="image/x-icon" href="/pollmonitor-favicon.png">
 </head>
 <body>
@@ -37,69 +37,26 @@
     <li><a href="/kapcsolat.html" id="nav-kapcsolat">Kapcsolat</a></li>
   </ul>
   </nav>
-
   <main>
-    <section class="kutato-leiras">
-        <div class="leiras-tartalom">
-            <h1 id="kutato-cim">Republikon</h1>
-            <p>
-                A Republikon Intézet egy liberális-centrista gondolkodó műhely és kutatóintézet, amely a demokratikus értékek, az európai integráció és a nyitott társadalom szempontjából elemzi a magyar politikai és társadalmi folyamatokat. Publikációikkal és rendezvényeikkel aktívan részt vesznek a közbeszédben.
-            <p>Weboldal: <a href="https://republikon.hu">republikon.hu</a></p>
-            <p>Ismert elemző: Horn Gábor, a Republikon Alapítvány kuratóriumi elnöke</p>
-        </div>
-        <div class="kutato-logo-kontener">
-            <img id="kutato-logo" src="../logo/republikon_logo.png" alt="A közvéleménykutató intézet logója">
-        </div>
-    </section>
 
-    <section class="diagram-kontener">
-      <h2>Támogatottsági adatok 2024. áprilisától (biztos pártválasztók)</h2>
-      <div class="diagram-canvas-kontener">
-        <canvas id="republikon-canvas"></canvas>
-      </div>
-      <h6>A pártok átlagát 30 napos mozgóátlaggal szemléltetjük. • Grafikon: PollMonitor.hu</h6>
-    </section>
-
-    <section class="diagram-kontener">
-        <div class="diagram-fejlec">
-            <h2>A Republikon közvéleménykutatásai</h2>
-            <div id="datum-valaszto-kontener" class="valaszto-gombok">
-                </div>
-        </div>
-        
-        <div class="diagram-valaszto-box">
-            <div id="kor-valaszto-kontener" class="valaszto-gombok">
-                </div>
-            <h3 id="aktualis-diagram-cim"></h3>
-        </div>
-
-        <div class="diagram-canvas-kontener">
-            <canvas id="kutato-oszlop-diagram-canvas"></canvas>
-        </div>
+    <section id="cikk-0618-1">
+      <h1>Medián: Nagyon vezet a Tisza</h1>
+      <h6>2025.06.18. 13:10 • Írta: Nagy Viktor</h6>
+      <p>A <a href="https://hvg.hu/360/20250618_A-Tisza-annyival-vezet-a-Fidesz-elott-amennyivel-Orbanek-vertek-2022-ben-Marki-Zay-hatos-fogatat">csütörtöki HVG-ben megjelenő felmérést</a> a Népszava szemlézte. A <a href="https://pollmonitor.hu/kutatok/median.html"><b>Medián</b></a> felméréséből kiderül, a Tisza támogatottsága a biztos pártválasztók között 15 százalék. A párt támogatottsága ebben a körben 51 százalék a Fidesz 36 százalékával szemben, a teljes népesség körében a TISZA-Fidesz 38-28 százalékon áll.</p>
+      <p>A biztos pártválasztók körében végzett felmérés adatai szerint a Tisza Párt magabiztosan, 43%-os támogatottsággal áll az első helyen. Ez az eredmény azt jelzi, hogy a párt képes volt mozgósítani és meggyőzni egy stabil szavazói bázist. A Fidesz a biztos szavazók 34%-át tudhatja maga mögött, ami közel tíz százalékpontos lemaradást jelent a Tisza Párthoz képest ebben a kategóriában.</p>
+      <h3>50 év alatt a TISZA népszerűbb</h3>
+      <p>"A Tisza Párt legkomolyabb bázisa továbbra is az ifjúság: a 40 év alattiak 58 százaléka szavazna egy most vasárnapi választáson a Tiszára, de a 40–49 éves korosztályban is vezet Magyar Péter pártja. Az 50 év felettiek körében még a Fidesz–KDNP az erősebb, de ezekben a korcsoportokban is megfigyelhető a kormánypárt támogatottságának enyhe visszaesése." - írja a Népszava.</p>
+      <h3>Az iskolai végzettségtől is függ a pártpreferencia</h3>
+      <p>A legfeljebb 8 általánost végzettek közel fele a Fideszt, alig egyötöde a Tiszát támogatja, ez az arány a diplomások és érettségizettek körében pontosan fordítva van.</p>
+      <h3>Hárompárti parlamentet jósol a Medián</h3>
+      <p>A kispártok támogatottságát tekintve a Medián felmérése rávilágít arra, hogy jelenleg a szélsőjobboldali Mi Hazánknak van esélye bejutni a parlamentbe, a párt 4-5 százalék körül áll. A Magyar Kétfarkú Kutya Párt 3, a DK 2-3 százalékon áll.</p>
+      <p><i>Amennyiben a pontos adatok megjelennek, frissítjük a statisztikáinkat és ezen adatok megjelennek a diagramokon is!</i></p>
     </section>
   </main>
-
-<script src="../kutatoOldal.js"></script>
 
   <footer>
     <p>&copy; 2025 PollMonitor – Minden jog fenntartva.</p>
   </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@2.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/date-fns@2.30.0/locale/hu/index.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
-  <script src="/js/charts.js"></script>
-  <script src="/js/kutato_charts.js"></script>
-  <script>
-    window.addEventListener("DOMContentLoaded", () => {
-      rajzolIntezetTrendDiagram("republikon-canvas", "Republikon");
-    });
-
-  </script>
-
   <div id="floating-countdown-container" class="floating-countdown-container">
     <button id="close-countdown-btn" class="close-countdown-btn" aria-label="Visszaszámláló bezárása">&times;</button>
     <h3 class="floating-countdown-title">VÁLASZTÁS 2026</h3>
