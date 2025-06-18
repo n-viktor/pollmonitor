@@ -1,4 +1,18 @@
 [
+    {
+    "intezet": "Medián",
+    "datum": "2025-06-07",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 51,
+      "Fidesz-KDNP": 36,
+      "DK": 3,
+      "Mi Hazánk": 5,
+      "MKKP": 3,
+      "Egyéb párt": 2
+    }
+  },
   {
     "intezet": "Republikon",
     "datum": "2025-06-03",
