@@ -156,7 +156,8 @@ function interpolateDailyData(partyData) {
   }
 
   const firstDate = new Date(sortedData[0].x);
-  const lastDate = new Date(sortedData[sortedData.length - 1].x);
+  const lastDate = new Date();
+  lastDate.setHours(0, 0, 0, 0); // mai nap 00:00
 
   // 2. Dátumtartomány generálása
   const allDates = getDaysBetween(firstDate, lastDate);
@@ -322,6 +323,7 @@ function rajzolTrendPontdiagram(canvasId) {
                 }
               },
               title: { display: true, text: '' },
+              max: new Date().toISOString(), // end at today
               ticks: {
                 autoSkip: true, // Hagyjuk, hogy a Chart.js kihagyja, ha túl sok lenne
                 maxTicksLimit: 29, // Max. 10 felirat az X tengelyen
