@@ -1,5 +1,5 @@
 [
-    {
+  {
     "intezet": "Medián",
     "datum": "2025-06-07",
     "tema": "Pártpreferencia",
@@ -11,6 +11,21 @@
       "Mi Hazánk": 5,
       "MKKP": 3,
       "Egyéb párt": 2
+    }
+  },
+  {
+    "intezet": "Medián",
+    "datum": "2025-06-07",
+    "tema": "Pártpreferencia",
+    "kor": "teljes népesség",
+    "eredmenyek": {
+      "Tisza": 38,
+      "Fidesz-KDNP": 28,
+      "DK": 2,
+      "Mi Hazánk": 4,
+      "MKKP": 3,
+      "Egyéb párt": 3,
+      "Bizonytalan/NT/NV": 22
     }
   },
   {
