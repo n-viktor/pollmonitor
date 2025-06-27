@@ -46,6 +46,7 @@ header {
   height: 80px; /* Példaméret, állítsd be ízlés szerint */
   width: auto;
   display: block; /* Eltávolítja az extra margót az img alatt */
+  pointer-events: none;
 }
 
 /* Fő tartalom terület */
