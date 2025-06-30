@@ -1,5 +1,34 @@
 [
   {
+    "intezet": "21 Kutatóközpont",
+    "datum": "2025-06-27",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 52,
+      "Fidesz-KDNP": 34,
+      "DK": 5,
+      "Mi Hazánk": 6,
+      "MKKP": 2,
+      "Egyéb párt": 1
+    }
+  },
+  {
+    "intezet": "21 Kutatóközpont",
+    "datum": "2025-06-27",
+    "tema": "Pártpreferencia",
+    "kor": "teljes népesség",
+    "eredmenyek": {
+      "Tisza": 32,
+      "Fidesz-KDNP": 25,
+      "DK": 3,
+      "Mi Hazánk": 5,
+      "MKKP": 2,
+      "Egyéb párt": 1,
+      "Bizonytalan/NT/NV": 32
+    }
+  },
+  {
     "intezet": "Závecz Research",
     "datum": "2025-06-27",
     "tema": "Pártpreferencia",
