@@ -43,6 +43,21 @@
     }
   },
   {
+    "intezet": "Závecz Research",
+    "datum": "2025-06-27",
+    "tema": "Pártpreferencia",
+    "kor": "teljes népesség",
+    "eredmenyek": {
+      "Tisza": 32,
+      "Fidesz-KDNP": 26,
+      "DK": 4,
+      "Mi Hazánk": 6,
+      "MKKP": 3,
+      "Egyéb párt": 5,
+      "Bizonytalan/NT/NV": 24
+    }
+  },
+  {
     "intezet": "Nézőpont",
     "datum": "2025-06-17",
     "tema": "Pártpreferencia",
