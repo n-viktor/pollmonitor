@@ -4,8 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PollMonitor.hu - közvéleménykutatási adatok egy helyen</title>
-  <link rel="canonical" href="https://pollmonitor.hu/" />
+  <link rel="canonical" href="https://pollmonitor.hu/" /> 
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="shortcut icon" type="image/x-icon" href="/pollmonitor-favicon.png">
 </head>
@@ -54,6 +57,10 @@
       </svg>
     </a>
   </header>
+
+  <div class="ticker-wrapper">
+  <div id="ticker" class="ticker"></div>
+  </div>
 
   <nav class="main-nav">
   <ul>
@@ -172,6 +179,8 @@
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
   <script src="js/charts.js"></script>
   <script src="countdown.js"></script>
+  <script src="/headlines.js"></script>
+  <script src="/shrink.js"></script>
   <script>
   // Feltételezve, hogy a rajzolTrendPontdiagram függvény elérhető és képes szűrni kor szerint.
 

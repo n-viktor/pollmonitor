@@ -83,7 +83,7 @@ function rajzolLegfrissebbOszlopdiagramok() {
                   label: function(tooltipItem) {
                       // tooltipItem.parsed.y az adatpont értéke (százalék)
                       // kutatas.datum a kutatás dátuma
-                      return `${tooltipItem.parsed.y}%, ${kutatas.datum}`;
+                      return `${tooltipItem.parsed.y}%`;
                   }
                 }
               }
