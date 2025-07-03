@@ -663,6 +663,10 @@ footer {
     }
 }
 
+img {
+    width: 50%;
+}
+
 /* Reszponzív design kisebb képernyőkre */
 @media (max-width: 768px) {
   header {
@@ -780,6 +784,10 @@ footer {
 
     .rotate-device-message {
         display: block; /* Az üzenet megjelenítése */
+    }
+
+    img {
+        width: 100%;
     }
 }
 
