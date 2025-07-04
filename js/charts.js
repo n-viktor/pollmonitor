@@ -249,7 +249,7 @@ function rajzolTrendPontdiagram(canvasId) {
     .then(res => res.json())
     .then(data => {
       const hatHonap = new Date();
-      hatHonap.setMonth(hatHonap.getMonth() - 13);
+      hatHonap.setMonth(hatHonap.getMonth() - 14);
       hatHonap.setHours(0, 0, 0, 0); // Pontosan a nap elejére állítjuk
 
       const filtered = data.filter(p =>
