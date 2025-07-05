@@ -32,7 +32,12 @@ function rajzolLegfrissebbOszlopdiagramok() {
 
         // Pártok rendezése csökkenő sorrendbe az eredmények alapján
         const sortedParties = Object.entries(kutatas.eredmenyek)
-          .sort(([, valueA], [, valueB]) => valueB - valueA);
+        .sort(([keyA, valueA], [keyB, valueB]) => {
+          if (keyA === 'Egyéb párt') return 1;
+          if (keyB === 'Egyéb párt') return -1;
+          return valueB - valueA;
+        });
+
 
         const labels = sortedParties.map(([key]) => key);
         const values = sortedParties.map(([, value]) => value);

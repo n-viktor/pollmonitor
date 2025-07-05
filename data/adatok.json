@@ -1,5 +1,19 @@
 [
   {
+    "intezet": "Magyar Társadalomkutató",
+    "datum": "2025-07-02",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 41,
+      "Fidesz-KDNP": 49,
+      "DK": 3,
+      "Mi Hazánk": 3,
+      "MKKP": 0,
+      "Egyéb párt": 4
+    }
+  },
+  {
     "intezet": "21 Kutatóközpont",
     "datum": "2025-06-27",
     "tema": "Pártpreferencia",
