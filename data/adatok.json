@@ -1,5 +1,19 @@
 [
   {
+    "intezet": "Real-PR 93.",
+    "datum": "2025-07-01",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 42,
+      "Fidesz-KDNP": 47,
+      "DK": 4,
+      "Mi Hazánk": 3,
+      "MKKP": 3,
+      "Egyéb párt": 1
+    }
+  },
+  {
     "intezet": "Magyar Társadalomkutató",
     "datum": "2025-07-02",
     "tema": "Pártpreferencia",
