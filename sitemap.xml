@@ -9,112 +9,117 @@
 
 <url>
   <loc>https://pollmonitor.hu/</loc>
-  <lastmod>2025-07-05T11:29:01+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/cikkek.html</loc>
-  <lastmod>2025-07-05T11:29:01+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/kutatok.html</loc>
-  <lastmod>2025-07-05T11:29:02+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/kutatok/21kutato.html</loc>
-  <lastmod>2025-07-05T11:29:01+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/kutatok/idea.html</loc>
-  <lastmod>2025-07-05T11:29:02+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/kutatok/iranytu.html</loc>
-  <lastmod>2025-07-05T11:29:02+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/kutatok/mtarskut.html</loc>
-  <lastmod>2025-07-05T11:29:01+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/kutatok/median.html</loc>
-  <lastmod>2025-07-05T11:29:01+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/kutatok/nezopont.html</loc>
-  <lastmod>2025-07-05T11:29:01+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/kutatok/publicus.html</loc>
-  <lastmod>2025-07-05T11:29:02+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/kutatok/republikon.html</loc>
-  <lastmod>2025-07-05T11:29:01+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/kutatok/realpr93.html</loc>
-  <lastmod>2025-07-05T11:29:02+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/kutatok/szazadveg.html</loc>
-  <lastmod>2025-07-05T11:29:01+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/kutatok/zavecz.html</loc>
-  <lastmod>2025-07-05T11:29:01+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/kapcsolat.html</loc>
-  <lastmod>2025-07-05T11:29:01+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://pollmonitor.hu/cikkek/250711-realpr-kutatas-fidesz-vezet.html</loc>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/cikkek/250705-ketparti-parlament-lehet-a-tarsadalomkutato-szerint.html</loc>
-  <lastmod>2025-07-05T11:29:01+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/cikkek/250703-elmult-heti-kutatasok-osszefoglalo.html</loc>
-  <lastmod>2025-07-05T11:29:02+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/cikkek/250630-soha-nem-mert-elonye-lehet-a-tiszanak.html</loc>
-  <lastmod>2025-07-05T11:29:02+00:00</lastmod>
-  <priority>0.80</priority>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/cikkek/250629-zavecz-11-szazalekkal-vezet-a-tisza.html</loc>
-  <lastmod>2025-07-05T11:29:01+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/cikkek/3-honap-utan-publikalt-a-nezopont-250627.html</loc>
-  <lastmod>2025-07-05T11:29:01+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/cikkek/median-nagyon-vezet-a-tisza-250618.html</loc>
-  <lastmod>2025-07-05T11:29:01+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://pollmonitor.hu/cikkek/republikon-a-tisza-vezet-250611.html</loc>
-  <lastmod>2025-07-05T11:29:01+00:00</lastmod>
+  <lastmod>2025-07-12T11:18:13+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 
