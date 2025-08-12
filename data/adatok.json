@@ -1,5 +1,34 @@
 [
   {
+    "intezet": "Publicus",
+    "datum": "2025-08-06",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 46,
+      "Fidesz-KDNP": 36,
+      "DK": 8,
+      "Mi Hazánk": 6,
+      "MKKP": 3,
+      "Egyéb párt": 1
+    }
+  },
+  {
+    "intezet": "Publicus",
+    "datum": "2025-08-06",
+    "tema": "Pártpreferencia",
+    "kor": "teljes népesség",
+    "eredmenyek": {
+      "Tisza": 32,
+      "Fidesz-KDNP": 24,
+      "DK": 5,
+      "Mi Hazánk": 4,
+      "MKKP": 2,
+      "Egyéb párt": 2,
+      "Bizonytalan/NT/NV": 31
+    }
+  },
+  {
     "intezet": "Republikon",
     "datum": "2025-07-29",
     "tema": "Pártpreferencia",

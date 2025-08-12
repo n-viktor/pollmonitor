@@ -708,7 +708,9 @@ footer {
 }
 
 img {
-    max-height: 500px;
+    max-height: 400px;
+    margin: auto;
+    display: block;
     height: auto;
     width: auto;
 }
