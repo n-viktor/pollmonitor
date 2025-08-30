@@ -1,5 +1,34 @@
 [
   {
+    "intezet": "Nézőpont",
+    "datum": "2025-08-19",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 38,
+      "Fidesz-KDNP": 46,
+      "DK": 4,
+      "Mi Hazánk": 6,
+      "MKKP": 5,
+      "Egyéb párt": 1
+    }
+  },
+  {
+    "intezet": "Nézőpont",
+    "datum": "2025-08-19",
+    "tema": "Pártpreferencia",
+    "kor": "teljes népesség",
+    "eredmenyek": {
+      "Tisza": 32,
+      "Fidesz-KDNP": 38,
+      "DK": 3,
+      "Mi Hazánk": 6,
+      "MKKP": 4,
+      "Egyéb párt": 0,
+      "Bizonytalan/NT/NV": 17
+    }
+  },
+  {
     "intezet": "IDEA",
     "datum": "2025-08-07",
     "tema": "Pártpreferencia",
@@ -116,20 +145,6 @@
     }
   },
   {
-    "intezet": "Real-PR 93.",
-    "datum": "2025-07-01",
-    "tema": "Pártpreferencia",
-    "kor": "biztos pártválasztók",
-    "eredmenyek": {
-      "Tisza": 42,
-      "Fidesz-KDNP": 47,
-      "DK": 4,
-      "Mi Hazánk": 3,
-      "MKKP": 3,
-      "Egyéb párt": 1
-    }
-  },
-  {
     "intezet": "Magyar Társadalomkutató",
     "datum": "2025-07-02",
     "tema": "Pártpreferencia",
@@ -141,6 +156,20 @@
       "Mi Hazánk": 3,
       "MKKP": 0,
       "Egyéb párt": 4
+    }
+  },
+  {
+    "intezet": "Real-PR 93.",
+    "datum": "2025-07-01",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 42,
+      "Fidesz-KDNP": 47,
+      "DK": 4,
+      "Mi Hazánk": 3,
+      "MKKP": 3,
+      "Egyéb párt": 1
     }
   },
   {
