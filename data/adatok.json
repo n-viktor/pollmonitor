@@ -29,6 +29,35 @@
     }
   },
   {
+    "intezet": "IDEA",
+    "datum": "2025-09-03",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 48,
+      "Fidesz-KDNP": 39,
+      "DK": 5,
+      "Mi Hazánk": 4,
+      "MKKP": 2,
+      "Egyéb párt": 2
+    }
+  },
+  {
+    "intezet": "IDEA",
+    "datum": "2025-09-03",
+    "tema": "Pártpreferencia",
+    "kor": "teljes népesség",
+    "eredmenyek": {
+      "Tisza": 35,
+      "Fidesz-KDNP": 29,
+      "DK": 4,
+      "Mi Hazánk": 3,
+      "MKKP": 2,
+      "Egyéb párt": 2,
+      "Bizonytalan/NT/NV": 25
+    }
+  },
+  {
     "intezet": "Závecz Research",
     "datum": "2025-09-03",
     "tema": "Pártpreferencia",
