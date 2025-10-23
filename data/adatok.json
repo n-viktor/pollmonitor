@@ -1,5 +1,164 @@
 [
   {
+    "intezet": "Publicus",
+    "datum": "2025-10-13",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 45,
+      "Fidesz-KDNP": 38,
+      "DK": 7,
+      "Mi Hazánk": 5,
+      "MKKP": 4,
+      "Egyéb párt": 2
+    }
+  },
+  {
+    "intezet": "Publicus",
+    "datum": "2025-10-13",
+    "tema": "Pártpreferencia",
+    "kor": "teljes népesség",
+    "eredmenyek": {
+      "Tisza": 32,
+      "Fidesz-KDNP": 27,
+      "DK": 5,
+      "Mi Hazánk": 4,
+      "MKKP": 2,
+      "Egyéb párt": 1,
+      "Bizonytalan/NT/NV": 29
+    }
+  },
+  {
+    "intezet": "XXI. Század Intézet",
+    "datum": "2025-10-08",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 41,
+      "Fidesz-KDNP": 44,
+      "DK": 3,
+      "Mi Hazánk": 7,
+      "MKKP": 5,
+      "Egyéb párt": 0
+    }
+  },
+  {
+    "intezet": "IDEA",
+    "datum": "2025-10-07",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 49,
+      "Fidesz-KDNP": 38,
+      "DK": 5,
+      "Mi Hazánk": 4,
+      "MKKP": 2,
+      "Egyéb párt": 2
+    }
+  },
+  {
+    "intezet": "IDEA",
+    "datum": "2025-10-07",
+    "tema": "Pártpreferencia",
+    "kor": "teljes népesség",
+    "eredmenyek": {
+      "Tisza": 37,
+      "Fidesz-KDNP": 27,
+      "DK": 4,
+      "Mi Hazánk": 3,
+      "MKKP": 2,
+      "Egyéb párt": 2,
+      "Bizonytalan/NT/NV": 25
+    }
+  },
+  {
+    "intezet": "21 Kutatóközpont",
+    "datum": "2025-10-10",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 53,
+      "Fidesz-KDNP": 35,
+      "DK": 3,
+      "Mi Hazánk": 6,
+      "MKKP": 2,
+      "Egyéb párt": 1
+    }
+  },
+  {
+    "intezet": "21 Kutatóközpont",
+    "datum": "2025-10-10",
+    "tema": "Pártpreferencia",
+    "kor": "teljes népesség",
+    "eredmenyek": {
+      "Tisza": 33,
+      "Fidesz-KDNP": 26,
+      "DK": 2,
+      "Mi Hazánk": 5,
+      "MKKP": 1,
+      "Egyéb párt": 1,
+      "Bizonytalan/NT/NV": 32
+    }
+  },
+  {
+    "intezet": "Republikon",
+    "datum": "2025-10-01",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 43,
+      "Fidesz-KDNP": 35,
+      "DK": 5,
+      "Mi Hazánk": 8,
+      "MKKP": 5,
+      "Egyéb párt": 4
+    }
+  },
+  {
+    "intezet": "Republikon",
+    "datum": "2025-10-01",
+    "tema": "Pártpreferencia",
+    "kor": "teljes népesség",
+    "eredmenyek": {
+      "Tisza": 30,
+      "Fidesz-KDNP": 25,
+      "DK": 5,
+      "Mi Hazánk": 4,
+      "MKKP": 4,
+      "Egyéb párt": 2,
+      "Bizonytalan/NT/NV": 29
+    }
+  },
+  {
+    "intezet": "Publicus",
+    "datum": "2025-09-12",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 46,
+      "Fidesz-KDNP": 37,
+      "DK": 7,
+      "Mi Hazánk": 6,
+      "MKKP": 4,
+      "Egyéb párt": 0
+    }
+  },
+  {
+    "intezet": "Publicus",
+    "datum": "2025-09-12",
+    "tema": "Pártpreferencia",
+    "kor": "teljes népesség",
+    "eredmenyek": {
+      "Tisza": 32,
+      "Fidesz-KDNP": 26,
+      "DK": 5,
+      "Mi Hazánk": 4,
+      "MKKP": 2,
+      "Egyéb párt": 0,
+      "Bizonytalan/NT/NV": 31
+    }
+  },
+  {
     "intezet": "Medián",
     "datum": "2025-09-07",
     "tema": "Pártpreferencia",
