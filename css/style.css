@@ -730,7 +730,7 @@ footer {
 }
 
 #fullscreen-target:fullscreen .countdown-timer {
-    transform: scale(1.8); /* Make the numbers much larger on the big screen */
+    transform: scale(2.5); /* Make the numbers much larger on the big screen */
 }
 
 
