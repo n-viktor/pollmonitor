@@ -1,19 +1,5 @@
 [
   {
-    "intezet": "Magyar Társadalomkutató",
-    "datum": "2026-01-23",
-    "tema": "Pártpreferencia",
-    "kor": "biztos pártválasztók",
-    "eredmenyek": {
-      "Tisza": 41,
-      "Fidesz-KDNP": 51,
-      "DK": 1,
-      "Mi Hazánk": 5,
-      "MKKP": 2,
-      "Egyéb párt": 0
-    }
-  },
-  {
     "intezet": "Minerva",
     "datum": "2026-01-22",
     "tema": "Pártpreferencia",
@@ -172,20 +158,6 @@
     }
   },
   {
-    "intezet": "Magyar Társadalomkutató",
-    "datum": "2025-12-19",
-    "tema": "Pártpreferencia",
-    "kor": "biztos pártválasztók",
-    "eredmenyek": {
-      "Tisza": 38,
-      "Fidesz-KDNP": 51,
-      "DK": 2,
-      "Mi Hazánk": 5,
-      "MKKP": 3,
-      "Egyéb párt": 1
-    }
-  },
-  {
     "intezet": "21 Kutatóközpont",
     "datum": "2025-12-16",
     "tema": "Pártpreferencia",
@@ -240,20 +212,6 @@
       "Mi Hazánk": 4,
       "MKKP": 3,
       "Egyéb párt": 2
-    }
-  },
-  {
-    "intezet": "Real-PR 93.",
-    "datum": "2025-12-03",
-    "tema": "Pártpreferencia",
-    "kor": "biztos pártválasztók",
-    "eredmenyek": {
-      "Tisza": 38,
-      "Fidesz-KDNP": 49,
-      "DK": 3,
-      "Mi Hazánk": 7,
-      "MKKP": 3,
-      "Egyéb párt": 0
     }
   },
   {
