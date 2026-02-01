@@ -1,9 +1,10 @@
   // Your dynamic headlines (can come from an API or elsewhere)
   const headlines = [
-    "<a href='/cikkek/250820-idea-csokkent-a-tisza-elonye.html'>IDEA: Csökkent a Tisza előnye a teljes népesség körében</a>",
-    "<a href='/cikkek/250812-publicus-tiz-szazalekkal-vezet-a-tisza.html'>Publicus: 10 százalékos a Tisza előnye a biztos pártválasztók körében</a>",
-    "<a href='/cikkek/250801-republikon-nem-valtoztak-jelentosen-a-preferenciak.html'>Republikon: Nem változtak jelentősen a preferenciák</a>",
-    "<a href='/cikkek/250712-szinte-valtozatlan-a-kulonbseg-a-republikon-szerint.html'>Republikon: 10 százalékkal vezet a Tisza</a>"
+    "MINERVA: TISZA 54,3% - 36,7% FIDESZ",
+    "<a href='/kutatok/republikon.html'>REPUBLIKON: TISZA 48% - 37% FIDESZ</a>",
+    "XXI. SZÁZAD INTÉZET: FIDESZ 45% - 40% TISZA",
+    "<a href='/kutatok/median.html'>MEDIÁN: TISZA 51% - 39% FIDESZ</a>",
+    "<a href='/kutatok/idea.html'>IDEA: TISZA 48% - 38% FIDESZ</a>",
   ];
 
   // Combine headlines into one scrolling string
