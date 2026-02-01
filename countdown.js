@@ -110,3 +110,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const countdownInterval = setInterval(updateCountdown, 1000);
     updateCountdown(); // Első futtatás azonnal
 });
+
+document.getElementById('fullscreen-toggle').addEventListener('click', function() {
+    const target = document.getElementById('fullscreen-target');
+    
+    if (!document.fullscreenElement) {
+        // Go fullscreen
+        if (target.requestFullscreen) {
+            target.requestFullscreen();
+        } else if (target.webkitRequestFullscreen) { /* Safari support */
+            target.webkitRequestFullscreen();
+        }
+    } else {
+        // Exit fullscreen
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+});

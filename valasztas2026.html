@@ -54,31 +54,14 @@
     </a>
   </header>
 
-  <nav class="main-nav">
-  <ul>
-    <li><a href="/" id="nav-home">Főoldal</a></li>
-    <li><a href="/valasztas2026.html" id="nav-val26">Hány nap a választásig?</a></li>
-    <li>
-      <a href="/kutatok.html" id="nav-kutatok">Kutatóintézetek</a>
-      <ul class="submenu">
-        <li><a href="/kutatok/21kutato.html" id="nav-21kutato">21 Kutatóközpont</a></li>
-        <li><a href="/kutatok/idea.html" id="nav-idea">IDEA Intézet</a></li>
-        <li><a href="/kutatok/iranytu.html" id="nav-iranytu">Iránytű Intézet</a></li>
-        <li><a href="/kutatok/mtarskut.html" id="nav-mtarskut">Magyar Társadalomkutató</a></li>
-        <li><a href="/kutatok/median.html" id="nav-median">Medián</a></li>
-        <li><a href="/kutatok/nezopont.html" id="nav-nezopont">Nézőpont Intézet</a></li>
-        <li><a href="/kutatok/publicus.html" id="nav-publicus">Publicus Intézet</a></li>
-        <li><a href="/kutatok/republikon.html" id="nav-republikon">Republikon Intézet</a></li>
-        <li><a href="/kutatok/realpr93.html" id="nav-realpr93">REAL-PR 93. Közvéleménykutató</a></li>
-        <li><a href="/kutatok/szazadveg.html" id="nav-szazadveg">Századvég</a></li>
-        <li><a href="/kutatok/zavecz.html" id="nav-zavecz">Závecz Research</a></li>
-        </ul>
-    </li>
-    <li><a href="/kapcsolat.html" id="nav-kapcsolat">Kapcsolat</a></li>
-  </ul>
-  </nav>
   <main>
-    <section class="countdown-section">
+    <section class="countdown-section" id="fullscreen-target" style="position: relative;">
+    <button id="fullscreen-toggle" class="fs-btn" title="Teljes képernyő">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
+            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+        </svg>
+    </button>
+
     <h2>VÁLASZTÁS 2026</h2>
     <div id="countdown-timer" class="countdown-timer">
         <div class="countdown-item">
@@ -99,7 +82,7 @@
         </div>
     </div>
     <p id="countdown-message" class="countdown-message"></p>
-    </section>
+</section>
   </main>
 
   <footer>

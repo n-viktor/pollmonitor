@@ -696,6 +696,43 @@ footer {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+/* Position the button inside the section */
+.countdown-section {
+    position: relative; /* This ensures the button stays in the corner */
+}
+
+.fs-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    padding: 8px;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+}
+
+.fs-btn:hover {
+    background: rgba(10, 225, 239, 0.5); /* Using your brand cyan color */
+}
+
+/* Adjust layout when in Fullscreen */
+#fullscreen-target:fullscreen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #000; /* Solid background for focus */
+    padding: 0;
+    margin: 0;
+}
+
+#fullscreen-target:fullscreen .countdown-timer {
+    transform: scale(1.8); /* Make the numbers much larger on the big screen */
+}
+
 
 
 @keyframes scroll-left {
