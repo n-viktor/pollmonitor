@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hány nap van a választásokig?</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #e63946;
+            --bg-color: #f1faee;
+            --text-color: #1d3557;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+
+        .container {
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 90%;
+        }
+
+        h1 {
+            font-weight: 900;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+        }
+
+        .time-box {
+            flex: 1;
+        }
+
+        .number {
+            display: block;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--primary-color);
+        }
+
+        .label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        .info {
+            margin-top: 2.5rem;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #666;
+            border-top: 1px solid #eee;
+            padding-top: 1.5rem;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 10px 20px;
+            background-color: var(--text-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="info">
+        <a href="https://pollmonitor.hu" class="button" target="_blank">⬅️ Vissza a főoldalra</a>
+    </div>
+
+    <h1>2026-os választásokig hátralévő idő</h1>
+    
+    <div class="countdown-container">
+        <div class="time-box">
+            <span class="number" id="days">00</span>
+            <span class="label">nap</span>
+        </div>
+        <div class="time-box">
+            <span class="number" id="hours">00</span>
+            <span class="label">óra</span>
+        </div>
+        <div class="time-box">
+            <span class="number" id="minutes">00</span>
+            <span class="label">perc</span>
+        </div>
+        <div class="time-box">
+            <span class="number" id="seconds">00</span>
+            <span class="label">mp</span>
+        </div>
+    </div>
+
+    <div class="info">
+        <p>A választást <strong>2026. április 12</strong>-ére tűzte ki a köztársasági elnök.</p>
+        <a href="https://vtr.valasztas.hu/ogy2026" class="button" target="_blank">Hivatalos információk</a><br>
+        <a href="https://www.youtube.com/@arculatgyujto" class="button" target="_blank">Április 12-én kövesd itt a választást!</a>
+    </div>
+</div>
+
+<script>
+    const targetDate = new Date(2026, 3, 12, 1, 0, 0).getTime();
+
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const difference = targetDate - now;
+
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById('days').innerText = days < 0 ? 0 : days;
+        document.getElementById('hours').innerText = hours < 0 ? 0 : hours;
+        document.getElementById('minutes').innerText = minutes < 0 ? 0 : minutes;
+        document.getElementById('seconds').innerText = seconds < 0 ? 0 : seconds;
+
+        if (difference < 0) {
+            document.querySelector('h1').innerText = "A választás megkezdődött!";
+        }
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+</script>
+
+</body>
+</html>
