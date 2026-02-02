@@ -1,5 +1,34 @@
 [
   {
+    "intezet": "Publicus",
+    "datum": "2026-01-24",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 48,
+      "Fidesz-KDNP": 40,
+      "DK": 4,
+      "Mi Hazánk": 5,
+      "MKKP": 3,
+      "Egyéb párt": 0
+    }
+  },
+  {
+    "intezet": "Publicus",
+    "datum": "2026-01-24",
+    "tema": "Pártpreferencia",
+    "kor": "teljes népesség",
+    "eredmenyek": {
+      "Tisza": 33,
+      "Fidesz-KDNP": 28,
+      "DK": 3,
+      "Mi Hazánk": 4,
+      "MKKP": 2,
+      "Egyéb párt": 0,
+      "Bizonytalan/NT/NV": 30
+    }
+  },
+  {
     "intezet": "Minerva",
     "datum": "2026-01-22",
     "tema": "Pártpreferencia",
