@@ -1,5 +1,6 @@
   // Your dynamic headlines (can come from an API or elsewhere)
   const headlines = [
+    "<a href='/kutatok/publicus.html'>PUBLICUS: TISZA 48% - 40% FIDESZ</a>",
     "MINERVA: TISZA 54,3% - 36,7% FIDESZ",
     "<a href='/kutatok/republikon.html'>REPUBLIKON: TISZA 48% - 37% FIDESZ</a>",
     "XXI. SZÁZAD INTÉZET: FIDESZ 45% - 40% TISZA",
