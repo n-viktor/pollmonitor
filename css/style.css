@@ -768,6 +768,10 @@ img {
     height: 40px; /* Kicsit kisebb logó mobilnézeten */
   }
 
+  #fullscreen-target:fullscreen .countdown-timer {
+        transform: scale(1.0); /* Make the numbers much larger on the big screen */
+    }
+
   #legfrissebb {
     flex-direction: column; /* Oszlopba rendezés kisebb képernyőkön */
     align-items: center; /* Középre igazítás */
