@@ -756,6 +756,10 @@ img {
     img {
         width: 100%;
     }
+
+    #fullscreen-target:fullscreen .countdown-timer {
+        transform: scale(1.0); /* Make the numbers much larger on the big screen */
+    }
 }
 
 /* Reszponzív design kisebb képernyőkre */
