@@ -1,5 +1,34 @@
 [
   {
+    "intezet": "21 Kutatóközpont",
+    "datum": "2026-02-02",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 53,
+      "Fidesz-KDNP": 37,
+      "DK": 3,
+      "Mi Hazánk": 5,
+      "MKKP": 2,
+      "Egyéb párt": 0
+    }
+  },
+  {
+    "intezet": "21 Kutatóközpont",
+    "datum": "2026-02-02",
+    "tema": "Pártpreferencia",
+    "kor": "teljes népesség",
+    "eredmenyek": {
+      "Tisza": 35,
+      "Fidesz-KDNP": 28,
+      "DK": 2,
+      "Mi Hazánk": 5,
+      "MKKP": 2,
+      "Egyéb párt": 1,
+      "Bizonytalan/NT/NV": 27
+    }
+  },
+  {
     "intezet": "Publicus",
     "datum": "2026-01-24",
     "tema": "Pártpreferencia",
