@@ -1,5 +1,75 @@
 [
   {
+    "intezet": "Republikon",
+    "datum": "2026-02-17",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 47,
+      "Fidesz-KDNP": 39,
+      "DK": 3,
+      "Mi Hazánk": 6,
+      "MKKP": 5,
+      "Egyéb párt": 0
+    }
+  },
+  {
+    "intezet": "Publicus",
+    "datum": "2026-02-12",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 48,
+      "Fidesz-KDNP": 39,
+      "DK": 5,
+      "Mi Hazánk": 5,
+      "MKKP": 4,
+      "Egyéb párt": 0
+    }
+  },
+  {
+    "intezet": "Nézőpont",
+    "datum": "2026-02-11",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 40,
+      "Fidesz-KDNP": 46,
+      "DK": 4,
+      "Mi Hazánk": 7,
+      "MKKP": 3,
+      "Egyéb párt": 0
+    }
+  },
+  {
+    "intezet": "Iránytű",
+    "datum": "2026-02-10",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 50,
+      "Fidesz-KDNP": 37,
+      "DK": 2,
+      "Mi Hazánk": 6,
+      "MKKP": 5,
+      "Egyéb párt": 0
+    }
+  },
+  {
+    "intezet": "IDEA",
+    "datum": "2026-02-07",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 48,
+      "Fidesz-KDNP": 38,
+      "DK": 5,
+      "Mi Hazánk": 5,
+      "MKKP": 3,
+      "Egyéb párt": 1
+    }
+  },
+  {
     "intezet": "21 Kutatóközpont",
     "datum": "2026-02-02",
     "tema": "Pártpreferencia",
