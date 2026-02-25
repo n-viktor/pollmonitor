@@ -1,5 +1,19 @@
 [
   {
+    "intezet": "Medián",
+    "datum": "2026-02-24",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 55,
+      "Fidesz-KDNP": 35,
+      "DK": 2,
+      "Mi Hazánk": 6,
+      "MKKP": 2,
+      "Egyéb párt": 0
+    }
+  },
+  {
     "intezet": "Republikon",
     "datum": "2026-02-17",
     "tema": "Pártpreferencia",
