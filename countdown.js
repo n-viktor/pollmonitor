@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Közös beállítások ---
-    const targetDate = new Date('2026-04-12T00:00:00').getTime(); // Cél dátum
+    const targetDate = new Date('2026-04-12T19:00:00').getTime(); // Cél dátum
 
     // --- Referenciák az EREDETI (STATIKUS) visszaszámlálóhoz (ha megtartod) ---
     const staticDaysSpan = document.getElementById('days');
