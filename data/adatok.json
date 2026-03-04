@@ -1,7 +1,49 @@
 [
   {
-    "intezet": "Medián",
+    "intezet": "Závecz Research",
+    "datum": "2026-02-28",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 50,
+      "Fidesz-KDNP": 38,
+      "DK": 3,
+      "Mi Hazánk": 7,
+      "MKKP": 2,
+      "Egyéb párt": 0
+    }
+  },
+  {
+    "intezet": "Nézőpont",
+    "datum": "2026-02-25",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 40,
+      "Fidesz-KDNP": 45,
+      "DK": 3,
+      "Mi Hazánk": 8,
+      "MKKP": 4,
+      "Egyéb párt": 0
+    }
+  },
+  {
+    "intezet": "Publicus",
     "datum": "2026-02-24",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 47,
+      "Fidesz-KDNP": 39,
+      "DK": 4,
+      "Mi Hazánk": 6,
+      "MKKP": 4,
+      "Egyéb párt": 0
+    }
+  },
+  {
+    "intezet": "Medián",
+    "datum": "2026-02-23",
     "tema": "Pártpreferencia",
     "kor": "biztos pártválasztók",
     "eredmenyek": {
