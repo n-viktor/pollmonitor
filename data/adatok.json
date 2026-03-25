@@ -1,5 +1,61 @@
 [
   {
+    "intezet": "Medián",
+    "datum": "2026-03-20",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 58,
+      "Fidesz-KDNP": 35,
+      "DK": 1,
+      "Mi Hazánk": 4,
+      "MKKP": 2,
+      "Egyéb párt": 0
+    }
+  },
+  {
+    "intezet": "Nézőpont",
+    "datum": "2026-03-17",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 40,
+      "Fidesz-KDNP": 46,
+      "DK": 3,
+      "Mi Hazánk": 8,
+      "MKKP": 3,
+      "Egyéb párt": 0
+    }
+  },
+  {
+    "intezet": "Minerva",
+    "datum": "2026-03-11",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 54.2,
+      "Fidesz-KDNP": 38.4,
+      "DK": 1,
+      "Mi Hazánk": 5,
+      "MKKP": 1,
+      "Egyéb párt": 0.4
+    }
+  },
+  {
+    "intezet": "XXI. Század Intézet",
+    "datum": "2026-03-09",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 41,
+      "Fidesz-KDNP": 46,
+      "DK": 4,
+      "Mi Hazánk": 6,
+      "MKKP": 3,
+      "Egyéb párt": 0
+    }
+  },
+  {
     "intezet": "IDEA",
     "datum": "2026-03-06",
     "tema": "Pártpreferencia",
