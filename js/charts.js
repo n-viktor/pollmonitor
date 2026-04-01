@@ -25,7 +25,7 @@ function rajzolLegfrissebbOszlopdiagramok() {
       const filtered = data
         .filter(k => k.kor === "biztos pártválasztók")
         .sort((a, b) => new Date(b.datum) - new Date(a.datum))
-        .slice(0, 3);
+        .slice(0, 6);
 
       filtered.forEach((kutatas, i) => {
         const ctx = document.getElementById(`chart${i}`).getContext('2d');
