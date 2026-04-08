@@ -1,4 +1,18 @@
 [
+ {
+    "intezet": "Iránytű",
+    "datum": "2026-04-04",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 51,
+      "Fidesz-KDNP": 40,
+      "DK": 1,
+      "Mi Hazánk": 4,
+      "MKKP": 4,
+      "Egyéb párt": 0
+    }
+  },
   {
     "intezet": "Publicus",
     "datum": "2026-03-30",
