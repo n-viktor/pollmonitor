@@ -1,5 +1,19 @@
 [
  {
+    "intezet": "IDEA",
+    "datum": "2026-04-04",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 50,
+      "Fidesz-KDNP": 37,
+      "DK": 4,
+      "Mi Hazánk": 5,
+      "MKKP": 2,
+      "Egyéb párt": 2
+    }
+  },
+ {
     "intezet": "Iránytű",
     "datum": "2026-04-04",
     "tema": "Pártpreferencia",
