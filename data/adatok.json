@@ -1,5 +1,19 @@
 [
- {
+  {
+    "intezet": "Publicus",
+    "datum": "2026-04-09",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 52,
+      "Fidesz-KDNP": 39,
+      "DK": 2,
+      "Mi Hazánk": 5,
+      "MKKP": 2,
+      "Egyéb párt": 0
+    }
+  },
+  {
     "intezet": "IDEA",
     "datum": "2026-04-04",
     "tema": "Pártpreferencia",
