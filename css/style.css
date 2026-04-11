@@ -781,6 +781,11 @@ img {
     align-items: center; /* Középre igazítás */
   }
 
+  #elo {
+    flex-direction: column; /* Oszlopba rendezés kisebb képernyőkön */
+    align-items: center; /* Középre igazítás */
+  }
+
   .chart-container {
     max-width: 100%; /* Kisebb képernyőn teljes szélesség */
     height: 300px; /* Még nagyobb magasság mobil nézeten */
