@@ -110,7 +110,7 @@ function rajzolLegfrissebbOszlopdiagramok() {
               },
               y: {
                 min: 0,
-                max: 60,
+                max: 70,
                 ticks: {
                   font: {
                     size: 11 // Kisebb betűméret az Y tengely címkéinek

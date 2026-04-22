@@ -84,7 +84,7 @@ function rajzolIntezetTrendDiagram(canvasId, intezetNev) {
             },
             y: {
               min: 0,
-              max: 60,
+              max: 70,
               ticks: {
                 callback: (value) => `${value}%`,
               },

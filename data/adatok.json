@@ -1,5 +1,104 @@
 [
   {
+    "intezet": "Medián",
+    "datum": "2026-04-20",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 66,
+      "Fidesz-KDNP": 25,
+      "DK": 2,
+      "Mi Hazánk": 6,
+      "MKKP": 1,
+      "Egyéb párt": 0
+    }
+  },
+  {
+    "intezet": "Medián",
+    "datum": "2026-04-20",
+    "tema": "Pártpreferencia",
+    "kor": "teljes népesség",
+    "eredmenyek": {
+      "Tisza": 56,
+      "Fidesz-KDNP": 21,
+      "DK": 1,
+      "Mi Hazánk": 6,
+      "MKKP": 1,
+      "Egyéb párt": 1,
+      "Bizonytalan/NT/NV": 14
+    }
+  },
+  {
+    "intezet": "Medián",
+    "datum": "2026-04-11",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 55.5,
+      "Fidesz-KDNP": 37.9,
+      "DK": 1.4,
+      "Mi Hazánk": 3.9,
+      "MKKP": 1.3,
+      "Egyéb párt": 0
+    }
+  },
+  {
+    "intezet": "21 Kutatóközpont",
+    "datum": "2026-04-11",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 55,
+      "Fidesz-KDNP": 38,
+      "DK": 1,
+      "Mi Hazánk": 5,
+      "MKKP": 1,
+      "Egyéb párt": 0
+    }
+  },
+  {
+    "intezet": "Závecz Research",
+    "datum": "2026-04-09",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 54,
+      "Fidesz-KDNP": 40,
+      "DK": 1,
+      "Mi Hazánk": 4,
+      "MKKP": 1,
+      "Egyéb párt": 0
+    }
+  },
+  {
+    "intezet": "AtlasIntel",
+    "datum": "2026-04-10",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 51.9,
+      "Fidesz-KDNP": 39.2,
+      "DK": 1.5,
+      "Mi Hazánk": 5,
+      "MKKP": 1.4,
+      "Egyéb párt": 0
+    }
+  },
+  {
+    "intezet": "Minerva",
+    "datum": "2026-04-10",
+    "tema": "Pártpreferencia",
+    "kor": "biztos pártválasztók",
+    "eredmenyek": {
+      "Tisza": 51,
+      "Fidesz-KDNP": 41,
+      "DK": 1.7,
+      "Mi Hazánk": 4.2,
+      "MKKP": 2.3,
+      "Egyéb párt": 0
+    }
+  },
+  {
     "intezet": "Publicus",
     "datum": "2026-04-09",
     "tema": "Pártpreferencia",
