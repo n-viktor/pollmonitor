@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 scales: {
                     y: {
                         beginAtZero: true,
-                        max: 55, // Max érték 55%
+                        max: 70, // Max érték 70%
                         title: {
                             display: true,
                             text: 'Támogatottság (%)'

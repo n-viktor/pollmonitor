@@ -339,7 +339,7 @@ function rajzolTrendPontdiagram(canvasId) {
             },
             y: {
               min: 0,
-              max: 60,
+              max: 70,
               title: { display: true, text: '' },
               ticks: {
                 // --- Módosítás itt ---
